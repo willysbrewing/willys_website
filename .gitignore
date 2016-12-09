@@ -1,0 +1,10 @@
+*.pyc
+*.sqlite3
+/venv/
+*.ini
+uwsgi.ini
+/static/
+/media/
+.DS_Store
+*.swp
+.env
