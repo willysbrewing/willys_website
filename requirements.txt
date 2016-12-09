@@ -13,6 +13,7 @@ pytz==2016.10
 six==1.10.0
 supervisor==3.3.1
 Unidecode==0.4.19
+uWSGI==2.0.14
 virtualenv==15.1.0
 wagtail==1.7
 webencodings==0.5
