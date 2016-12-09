@@ -3,9 +3,22 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
-
-    <p>You are the master of the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).
-
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+<!-- header -->
+<div id="header" class="page-header header-filter">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+        <h1 id="header-title" class="title">
+          <p><span class="font-brand">WILLY'S</span></p>
+        </h1>
+        <div class="square">
+            <h2 id="header-subtitle" class="subtitle">
+              <p>Forma parte de la <strong>REVOLUCIÓN</strong> de la cerveza</p>
+            </h2>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- endheader -->
 {% endblock %}
