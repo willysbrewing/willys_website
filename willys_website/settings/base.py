@@ -18,11 +18,8 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -88,35 +85,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'willys_website.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-if os.getenv('PROD'):
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('DATABASE_ENGINE'),
-            'NAME': os.getenv('DATABASE_NAME'),
-            'USER': os.getenv('DATABASE_USER'),
-            'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-            'HOST': os.getenv('DATABASE_HOST'),
-            'PORT': os.getenv('DATABASE_PORT'),
-        }  
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC+1'
 
 USE_I18N = True
 
@@ -145,7 +119,7 @@ MEDIA_URL = '/media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "willys_website"
+WAGTAIL_SITE_NAME = "Willy's Website"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
