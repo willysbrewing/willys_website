@@ -1,6 +1,7 @@
 *.pyc
 *.sqlite3
 /venv/
+/env/
 *.ini
 uwsgi.ini
 /static/
