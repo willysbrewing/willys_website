@@ -94,6 +94,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'willys_website.wsgi.application'
 WAGTAIL_ENABLE_UPDATE_CHECK = True
 EMAIL_SUBJECT_PREFIX = '[Willys Website] '
+USE_ETAGS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

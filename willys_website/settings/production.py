@@ -4,6 +4,8 @@ import os
 from .base import *
 
 DEBUG = False
+if os.getenv('DEBUG') == 'True':
+    DEBUG = True
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
