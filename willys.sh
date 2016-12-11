@@ -7,7 +7,7 @@ case "$1" in
         echo "not yet"
         ;;
     migrate)
-        pyton manage.py makemigrations && python manage.py migrate
+        python manage.py migrate production
         ;;
     deploy)
         pip install -r requirements.txt && python manage.py collectstatic && supervisorctl restart uwsgi-willys
