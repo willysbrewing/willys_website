@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'home',
     'search',
+    'dashboard',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -47,6 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+INSTALLED_APPS += [
+    'wagtail.contrib.settings',
+    'wagtail.contrib.wagtailsitemaps',
+    'wagtail.contrib.wagtailfrontendcache',
+    'wagtail.contrib.wagtailsearchpromotions',
 ]
 
 MIDDLEWARE = [
@@ -84,13 +92,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'willys_website.wsgi.application'
+WAGTAIL_ENABLE_UPDATE_CHECK = True
+EMAIL_SUBJECT_PREFIX = '[Willys Website] '
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC+1'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
