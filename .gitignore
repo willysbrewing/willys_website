@@ -8,4 +8,5 @@ uwsgi.ini
 /media/
 .DS_Store
 *.swp
-.env
+*.env
+prod.env
