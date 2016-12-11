@@ -7,10 +7,10 @@ case "$1" in
         echo "not yet"
         ;;
     migrate)
-        ./manage.py makemigrations && ./manage.py migrate
+        pyton manage.py makemigrations && python manage.py migrate
         ;;
     deploy)
-        pip install -r requirements.txt && ./manage.py collectstatic && supervisorctl restart uwsgi-willys
+        pip install -r requirements.txt && python manage.py collectstatic && supervisorctl restart uwsgi-willys
         ;;
   *)
         echo "Usage: willys.sh {develop|deploy|migrate}" >&2
