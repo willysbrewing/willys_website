@@ -1,0 +1,72 @@
+{% load cache staticfiles wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags %}<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Torchbox{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
+
+        {% if self.canonical_url %}
+            <link rel="canonical" href="{{ self.canonical_url }}" />
+        {% endif %}
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:creator" content="">
+        <meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Torchbox">
+        <meta name="twitter:description" content="{% if self.intro %}{{ self.intro|striptags }}{% elif self.search_description %}{{ self.search_description }}{% endif %}">
+        <meta name="twitter:image:src" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static "torchbox/images/about-placeholder6.jpg" %}{% endif %}" />
+
+        <meta property="fb:app_id" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://{{ request.site.hostname }}{{ self.url }}" />
+        <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Torchbox" />
+        <meta property="og:image" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-1024 as img %}{{ img.url }}{% else %}{% static "torchbox/images/about-placeholder6.jpg" %}{% endif %}" />
+        <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
+        <meta property="og:site_name" content="" />
+
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+        {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
+
+    </head>
+    <body>
+
+        <!-- Google Tag Manager -->
+        <!-- End Google Tag Manager -->
+
+        {% wagtailuserbar %} {# Don't delete this #}
+
+        <header class="container container-header">
+            <nav role="navigation">
+                <a href="/" class="logo">
+                    {% include 'willys_website/includes/willys_logo.html' %}
+                </a>
+
+                <a href="#menu" class="menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+
+            </nav>
+        </header>
+
+        <main>{% spaceless %}{% block content %}{% endblock %}{% endspaceless %}</main>
+
+        <footer>
+          Willy's
+        </footer>
+
+
+        <script src="{% static 'js/main.js' %}"></script>
+
+        {% block extra_js %}{% endblock %} {# Override this block in individual templates in order to add javascript on a template by template basis #}
+    </body>
+</html>

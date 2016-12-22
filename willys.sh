@@ -4,7 +4,7 @@ source venv/bin/activate
 
 case "$1" in
     develop)
-        echo "not yet"
+        python manage.py runserver
         ;;
     migrate)
         python manage.py migrate production

@@ -20,11 +20,21 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
+
+ADMINS = (
+    ('Sergio Gordillo', 'sgordillogallardo@gmail.com'),
+)
+
+MANAGERS = ADMINS
+
+EMAIL_SUBJECT_PREFIX = '[Willys Website] '
+
+WAGTAIL_ENABLE_UPDATE_CHECK = True
+
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'search',
+    'willys_website.core',
     'dashboard',
 
     'wagtail.wagtailforms',
@@ -86,15 +96,32 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'willys_website.wsgi.application'
-WAGTAIL_ENABLE_UPDATE_CHECK = True
-EMAIL_SUBJECT_PREFIX = '[Willys Website] '
+
 USE_ETAGS = True
+
+# Password validation
+# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -131,7 +158,3 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Willy's Website"
-
-# Base URL to use when referring to full URLs within the Wagtail admin backend -
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://www.willysbrewing.com'

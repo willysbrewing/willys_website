@@ -1,0 +1,49 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="home-hero initial-load">
+
+    <style>
+    {% for heroItem in hero %}
+    {% if heroItem.color %}
+    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %} .link {
+        color: {{ heroItem.color }};
+    }
+    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %} .link:after {
+        background-color: {{ heroItem.color }};
+    }
+    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %}:before {
+        background: radial-gradient(ellipse at center, {{ heroItem.color }}  0%, rgba(35,176,176,0) 58%, rgba(35,176,176,0) 69%);
+    }
+    {% endif %}
+    {% endfor %}
+    </style>
+
+    <!-- background images for features -->
+    <div class="feature-images">
+
+    {% for heroItem in hero %}
+        {% image heroItem.background fill-1800x978 as imgbanner %}
+        <div class="feature-image" data-name="{% cycle '1' '2' '3' %}" style="background-image: url({{ imgbanner.url }})"></div>
+    {% endfor %}
+    </div>
+
+    <!--/feature-images -->
+    <div class="container">
+        <!--<h1>{{ self.hero_intro }}</h1>-->
+        <h1>Willy's Brewing</h1>
+        <ul class="featured-case-studies">
+            {% for heroItem in hero %}
+            <li class="featured-case-study{% cycle '-one' '-two' '-three' %}" data-name="{% cycle '1' '2' '3' %}">
+                {% if heroItem.link %}
+                <a href="{{ heroItem.link }}">
+                {% endif %}
+                    <p class="link">{{ heroItem.text }}</p>
+                {% if heroItem.link %}
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</section>

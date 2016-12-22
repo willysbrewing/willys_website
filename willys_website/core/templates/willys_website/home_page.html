@@ -1,0 +1,9 @@
+{% extends "willys_website/base.html" %}
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags staticfiles %}
+{% block body_class %}{% endblock %}
+{% block title_postfix %}{% endblock %}
+{% block content %}
+
+    {% include 'willys_website/includes/hero.html' with hero=self.hero.all %}
+
+{% endblock %}
