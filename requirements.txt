@@ -1,7 +1,9 @@
 beautifulsoup4==4.5.1
 click==6.6
 Django==1.10.4
+django-appconf==1.0.2
 django-bower==5.2.0
+django-compressor==2.1
 django-modelcluster==2.0
 django-redis==4.6.0
 django-taggit==0.18.3
@@ -14,8 +16,10 @@ Pillow==3.4.2
 psycopg2==2.6.2
 python-dotenv==0.6.1
 pytz==2016.10
+rcssmin==1.0.6
 redis==2.10.5
 requests==2.12.4
+rjsmin==1.0.12
 six==1.10.0
 Unidecode==0.4.19
 uWSGI==2.0.14
