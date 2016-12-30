@@ -1,0 +1,10 @@
+User-Agent: *
+Disallow: /admin/
+Disallow: /django-admin/
+Disallow: /django-JN4G0zjF/
+Disallow: /JN4G0zjF/
+
+User-agent: EtaoSpider
+Disallow: /
+
+Sitemap: https://www.willysbrewing.com/sitemap.xml

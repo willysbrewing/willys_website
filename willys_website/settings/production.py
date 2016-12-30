@@ -9,7 +9,7 @@ if os.getenv('DEBUG') == 'True':
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS=['*'] #TODO
+ALLOWED_HOSTS=['localhost'] #TODO
 
 DATABASES = {
     'default': {
@@ -22,15 +22,20 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": os.getenv('REDIS_LOCATION'),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": os.getenv('REDIS_LOCATION'),
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
+
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+BASE_URL = 'http://www.willysbrewing.com'
 
 try:
     from .local import *

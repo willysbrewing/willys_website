@@ -10,3 +10,11 @@ uwsgi.ini
 *.swp
 *.env
 prod.env
+node_modules*
+/docs/_build/
+/.tmp/
+*.log
+/dist/
+/willys_website/core/static/bundles/
+__pycache__/
+bower_components/

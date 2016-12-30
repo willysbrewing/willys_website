@@ -1,0 +1,33 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% for heroItem in hero %}
+{% image heroItem.background fill-1800x978 as imgbanner %}
+
+<!-- header -->
+<section id="header" class="page-header header-filter home-hero initial-load" style="background-image: url({{ imgbanner.url }})">
+
+  <style>
+  {% if hero.color %}
+  {% endif %}
+  </style>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+        <h1 id="header-title" class="title">
+          <p><span class="font-brand">{{ heroItem.name }}</span></p>
+        </h1>
+        <div class="square">
+            <h2 id="header-subtitle" class="subtitle">
+              <p>{{ heroItem.claim }}</p>
+            </h2>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- endheader -->
+
+
+</section>
+{% endfor %}
