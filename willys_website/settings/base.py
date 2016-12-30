@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djangobower',
+    'compressor',
 ]
 
 INSTALLED_APPS += [
@@ -136,6 +138,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+WAGTAIL_SITE_NAME = "Willy's Website"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -143,10 +146,12 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
+    os.path.join(PROJECT_DIR, 'core/static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -155,6 +160,15 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# Wagtail settings
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_DIR, 'core/static')
 
-WAGTAIL_SITE_NAME = "Willy's Website"
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'bootstrap',
+)
+
+COLLECT_STATIC_IGNORE = [
+    'bower_components',
+    'jquery',
+    'bootstrap',
+]

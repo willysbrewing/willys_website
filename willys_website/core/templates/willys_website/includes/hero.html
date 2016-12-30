@@ -1,49 +1,33 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<section class="home-hero initial-load">
+{% for heroItem in hero %}
+{% image heroItem.background fill-1800x978 as imgbanner %}
 
-    <style>
-    {% for heroItem in hero %}
-    {% if heroItem.color %}
-    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %} .link {
-        color: {{ heroItem.color }};
-    }
-    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %} .link:after {
-        background-color: {{ heroItem.color }};
-    }
-    .featured-case-studies .featured-case-study{% cycle '-one' '-two' '-three' %}:before {
-        background: radial-gradient(ellipse at center, {{ heroItem.color }}  0%, rgba(35,176,176,0) 58%, rgba(35,176,176,0) 69%);
-    }
-    {% endif %}
-    {% endfor %}
-    </style>
+<!-- header -->
+<section id="header" class="page-header header-filter home-hero initial-load" style="background-image: url({{ imgbanner.url }})">
 
-    <!-- background images for features -->
-    <div class="feature-images">
+  <style>
+  {% if hero.color %}
+  {% endif %}
+  </style>
 
-    {% for heroItem in hero %}
-        {% image heroItem.background fill-1800x978 as imgbanner %}
-        <div class="feature-image" data-name="{% cycle '1' '2' '3' %}" style="background-image: url({{ imgbanner.url }})"></div>
-    {% endfor %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-6">
+        <h1 id="header-title" class="title">
+          <p><span class="font-brand">{{ heroItem.name }}</span></p>
+        </h1>
+        <div class="square">
+            <h2 id="header-subtitle" class="subtitle">
+              <p>{{ heroItem.claim }}</p>
+            </h2>
+          </div>
+      </div>
     </div>
+  </div>
+</section>
+<!-- endheader -->
 
-    <!--/feature-images -->
-    <div class="container">
-        <!--<h1>{{ self.hero_intro }}</h1>-->
-        <h1>Willy's Brewing</h1>
-        <ul class="featured-case-studies">
-            {% for heroItem in hero %}
-            <li class="featured-case-study{% cycle '-one' '-two' '-three' %}" data-name="{% cycle '1' '2' '3' %}">
-                {% if heroItem.link %}
-                <a href="{{ heroItem.link }}">
-                {% endif %}
-                    <p class="link">{{ heroItem.text }}</p>
-                {% if heroItem.link %}
-                </a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 
 </section>
+{% endfor %}

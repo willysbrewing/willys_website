@@ -4,6 +4,8 @@ from .base import *
 
 DEBUG = True
 
+ALLOWED_HOSTS=['*']
+
 SECRET_KEY = '*z6o_48l9jfhgy6ppuc@yx#ys2s%$aszm%fip-jz*kl-bvnuf5'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

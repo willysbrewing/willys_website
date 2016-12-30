@@ -9,7 +9,7 @@ if os.getenv('DEBUG') == 'True':
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS=['*'] #TODO
+ALLOWED_HOSTS=['localhost'] #TODO
 
 DATABASES = {
     'default': {

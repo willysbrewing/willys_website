@@ -1,4 +1,5 @@
-{% load cache staticfiles wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags %}<!DOCTYPE html>
+{% load cache staticfiles wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags compress %}
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
@@ -31,7 +32,12 @@
 
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <!-- Latest compiled and minified CSS -->
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+        {% endcompress %}
+
 
         {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
 
@@ -43,29 +49,41 @@
 
         {% wagtailuserbar %} {# Don't delete this #}
 
-        <header class="container container-header">
-            <nav role="navigation">
-                <a href="/" class="logo">
-                    {% include 'willys_website/includes/willys_logo.html' %}
-                </a>
-
-                <a href="#menu" class="menu-button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-
-            </nav>
-        </header>
+        <!-- navbar -->
+        <div id="main-nav" class="navbar navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!--<a class="navbar-brand" href="javascript:void(0)"><span class="font-brand">WILLY'S</span></a>-->
+              <a class="navbar-brand" href="javascript:void(0)">
+                <img class="white-logo" alt="Willy's Brewing" src="{% static 'images/willys_white.png' %}">
+                <img class="black-logo" alt="Willy's Brewing" src="{% static 'images/willys_black.png' %}">
+              </a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#what" class="smooth">¿Qué es?</a></li>
+                <li><a href="#bemore" class="smooth">La Revolución</a></li>
+                <li><a href="#benefits" class="smooth">¡Participa!</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- endnavbar -->
 
         <main>{% spaceless %}{% block content %}{% endblock %}{% endspaceless %}</main>
 
-        <footer>
-          Willy's
-        </footer>
+        {% include 'willys_website/includes/footer.html' %}
 
-
-        <script src="{% static 'js/main.js' %}"></script>
+        {% compress js %}
+        <script type="text/javascript" src='{% static 'jquery/dist/jquery.min.js' %}'></script>
+        <script type="text/javascript" src='{% static 'bootstrap/dist/js/bootstrap.min.js' %}'></script>
+        <script type="text/javascript" src='{% static 'scripts/main.js' %}'></script>
+        {% endcompress %}
 
         {% block extra_js %}{% endblock %} {# Override this block in individual templates in order to add javascript on a template by template basis #}
     </body>
