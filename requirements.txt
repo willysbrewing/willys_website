@@ -1,12 +1,12 @@
 beautifulsoup4==4.5.1
 click==6.6
 Django==1.10.4
+django-bower==5.2.0
 django-modelcluster==2.0
 django-redis==4.6.0
 django-taggit==0.18.3
 django-treebeard==4.1.0
 djangorestframework==3.5.3
-django-webpack-loader==0.4.1
 gunicorn==19.6.0
 html5lib==0.999999999
 meld3==1.0.2
@@ -15,6 +15,7 @@ psycopg2==2.6.2
 python-dotenv==0.6.1
 pytz==2016.10
 redis==2.10.5
+requests==2.12.4
 six==1.10.0
 Unidecode==0.4.19
 uWSGI==2.0.14
