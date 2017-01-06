@@ -1,4 +1,4 @@
-{% load cache staticfiles wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags compress %}
+{% load willys_website_tags cache static wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags compress %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,7 +6,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Torchbox{% endblock %}</title>
+        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Willy's{% endblock %}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
@@ -18,15 +18,15 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="">
         <meta name="twitter:creator" content="">
-        <meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Torchbox">
+        <meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Willy's">
         <meta name="twitter:description" content="{% if self.intro %}{{ self.intro|striptags }}{% elif self.search_description %}{{ self.search_description }}{% endif %}">
-        <meta name="twitter:image:src" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static "torchbox/images/about-placeholder6.jpg" %}{% endif %}" />
+        <meta name="twitter:image:src" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static "" %}{% endif %}" />
 
         <meta property="fb:app_id" content="" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://{{ request.site.hostname }}{{ self.url }}" />
-        <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Torchbox" />
-        <meta property="og:image" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-1024 as img %}{{ img.url }}{% else %}{% static "torchbox/images/about-placeholder6.jpg" %}{% endif %}" />
+        <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Willy's" />
+        <meta property="og:image" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-1024 as img %}{{ img.url }}{% else %}{% static "" %}{% endif %}" />
         <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta property="og:site_name" content="" />
 
@@ -38,42 +38,18 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
         {% endcompress %}
 
-
-        {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
 
     </head>
-    <body>
+    <body class="{% block body_class %}{% endblock %}">
 
         <!-- Google Tag Manager -->
         <!-- End Google Tag Manager -->
-
-        {% wagtailuserbar %} {# Don't delete this #}
-
-        <!-- navbar -->
-        <div id="main-nav" class="navbar navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!--<a class="navbar-brand" href="javascript:void(0)"><span class="font-brand">WILLY'S</span></a>-->
-              <a class="navbar-brand" href="javascript:void(0)">
-                <img class="white-logo" alt="Willy's Brewing" src="{% static 'images/willys_white.png' %}">
-                <img class="black-logo" alt="Willy's Brewing" src="{% static 'images/willys_black.png' %}">
-              </a>
-            </div>
-            <div class="navbar-collapse collapse navbar-responsive-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#what" class="smooth">¿Qué es?</a></li>
-                <li><a href="#bemore" class="smooth">La Revolución</a></li>
-                <li><a href="#benefits" class="smooth">¡Participa!</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- endnavbar -->
 
         <main>{% spaceless %}{% block content %}{% endblock %}{% endspaceless %}</main>
 
@@ -85,6 +61,5 @@
         <script type="text/javascript" src='{% static 'scripts/main.js' %}'></script>
         {% endcompress %}
 
-        {% block extra_js %}{% endblock %} {# Override this block in individual templates in order to add javascript on a template by template basis #}
     </body>
 </html>

@@ -18,3 +18,4 @@ node_modules*
 /willys_website/core/static/bundles/
 __pycache__/
 bower_components/
+migrations/
