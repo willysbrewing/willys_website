@@ -7,7 +7,7 @@ case "$1" in
         python manage.py runserver
         ;;
     migrate)
-        python manage.py makemigrations && manage.py migrate production
+        python manage.py makemigrations && python manage.py migrate production
         ;;
     deploy)
         pip install -r requirements.txt && python manage.py bower_install --allow-root && python manage.py collectstatic --noinput --clear && supervisorctl restart uwsgi-willys

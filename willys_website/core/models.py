@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.utils.encoding import python_2_unicode_compatible
 from django import forms
+from django.shortcuts import render
 from django.core.validators import RegexValidator
 
 from wagtail.wagtailcore.models import Page, Orderable
@@ -63,7 +64,7 @@ class AlignedHTMLBlock(StructBlock):
         icon = "code"
 
 
-class BlogStreamBlock(StreamBlock):
+class blogtreamBlock(StreamBlock):
     h2 = CharBlock(icon="title", classname="title")
     h3 = CharBlock(icon="title", classname="title")
     h4 = CharBlock(icon="title", classname="title")
@@ -179,7 +180,7 @@ class RelatedLink(LinkFields):
 ################# HomePage #######################################
 ##################################################################
 
-class HomePageHero(HeroItem):
+class HomePageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.HomePage', related_name='hero')
 
 class HomePagePromo(Orderable, LinkFields):
@@ -228,119 +229,69 @@ class HomePage(Page):
 
     promote_panels = Page.promote_panels
 
-##################################################################
-################# Standard Index Page ############################
-##################################################################
-
-class StandardIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('willys_website.StandardIndexPage', related_name='related_links')
-
-
-class StandardIndexPage(Page):
-    intro = RichTextField(blank=True)
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
-        InlinePanel('related_links', label="Related links"),
-    ]
-
-    promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
-    ]
 
 ##################################################################
-################# Standard Page ##################################
+################# Standard Page @TODO ############################
 ##################################################################
 
-class StandardPageHeroItem(Orderable, HeroItem):
-    page = ParentalKey('willys_website.StandardPage', related_name='hero')
-
-
-class StandardPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('willys_website.StandardPage', related_name='related_links')
-
-
-class StandardPage(Page):
-    intro = RichTextField(blank=True)
-    body = RichTextField(blank=True)
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
-        InlinePanel('hero', label="Hero"),
-        FieldPanel('body', classname="full"),
-        InlinePanel('related_links', label="Related links"),
-    ]
-
-    promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
-    ]
+# class StandardPageHeroItem(Orderable, HeroItem):
+#     page = ParentalKey('willys_website.StandardPage', related_name='hero')
+#
+# class StandardPage(Page):
+#     content_panels = Page.content_panels + [
+#         InlinePanel('hero', label="Hero"),
+#     ]
+#
+#     promote_panels = Page.promote_panels + [
+#         ImageChooserPanel('feed_image'),
+#     ]
 
 ##################################################################
 ################# Blog Index Page ################################
 ##################################################################
 
-class BlogIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('willys_website.BlogIndexPage', related_name='related_links')
-
+class BlogIndexPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.BlogIndexPage', related_name='hero')
 
 class BlogIndexPage(Page):
-    intro = RichTextField(blank=True)
-
-    search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-    ]
 
     @property
-    def blogs(self):
-        # Get list of live blog pages that are descendants of this page
-        blogs = BlogPage.objects.live().descendant_of(self)
+    def blog_posts(self):
+        # Get list of blog pages that are descendants of this page
+        blog_posts= BlogPage.objects.live().descendant_of(self)
 
         # Order by most recent date first
-        blogs = blogs.order_by('-date')
+        blog_posts = blog_posts.order_by('-date')
+        return blog_posts
 
-        return blogs
-
-    def get_context(self, request):
-        # Get blogs
-        blogs = self.blogs
+    def serve(self, request):
+        # Get blog_posts
+        blog_posts = self.blog_posts
 
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
-            blogs = blogs.filter(tags__name=tag)
+            blog_posts = blog_posts.filter(tags__tag__slug=tag)
 
         # Pagination
+        per_page = 12
         page = request.GET.get('page')
-        paginator = Paginator(blogs, 10)  # Show 10 blogs per page
+        paginator = Paginator(blog_posts, per_page)  # Show 10 blog_posts per page
         try:
-            blogs = paginator.page(page)
+            blog_posts = paginator.page(page)
         except PageNotAnInteger:
-            blogs = paginator.page(1)
+            blog_posts = paginator.page(1)
         except EmptyPage:
-            blogs = paginator.page(paginator.num_pages)
+            blog_posts = paginator.page(paginator.num_pages)
 
-        # Update template context
-        context = super(BlogIndexPage, self).get_context(request)
-        context['blogs'] = blogs
-        return context
+        return render(request, self.template, {
+            'self': self,
+            'blog_posts': blog_posts,
+            'per_page': per_page,
+        })
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full"),
-        InlinePanel('related_links', label="Related links"),
+        InlinePanel('hero', label="Hero"),
     ]
 
     promote_panels = Page.promote_panels
@@ -352,31 +303,32 @@ class BlogIndexPage(Page):
 class BlogPageHeroItem(Orderable, HeroItem):
     page = ParentalKey('willys_website.BlogPage', related_name='hero')
 
-
 class BlogPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.BlogPage', related_name='related_links')
-
 
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('willys_website.BlogPage', related_name='tagged_items')
 
-
 class BlogPage(Page):
-    body = StreamField(BlogStreamBlock())
+    body = StreamField(blogtreamBlock())
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
 
     @property
     def blog_index(self):
-        # Find closest ancestor which is a blog index
-        return self.get_ancestors().type(BlogIndexPage).last()
+       # Find blog index in ancestors
+       for ancestor in reversed(self.get_ancestors()):
+           if isinstance(ancestor.specific, BlogIndexPage):
+               return ancestor
+
+       # No ancestors are blog indexes,
+       # just return first blog index in database
+       return BlogIndexPage.objects.first()
+
+    @property
+    def image(self):
+       hero = self.hero.all()
+       return hero[0].background
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
@@ -386,9 +338,37 @@ class BlogPage(Page):
     ]
 
     promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
         FieldPanel('tags'),
     ]
+
+##################################################################
+################# Event Index Page ###############################
+##################################################################
+
+class EventIndexPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.EventIndexPage', related_name='hero')
+
+class EventIndexPage(Page):
+
+    @property
+    def events(self):
+        # Get list of live event pages that are descendants of this page
+        events = EventPage.objects.live().descendant_of(self)
+
+        # Filter events list to get ones that are either
+        # running now or start in the future
+        events = events.filter(date_from__gte=date.today())
+
+        # Order by date
+        events = events.order_by('date_from')
+
+        return events
+
+    content_panels = Page.content_panels + [
+        InlinePanel('hero', label="Hero"),
+    ]
+
+    promote_panels = Page.promote_panels
 
 ##################################################################
 ################# Event Page #####################################
@@ -396,7 +376,6 @@ class BlogPage(Page):
 
 class EventPageHeroItem(Orderable, HeroItem):
     page = ParentalKey('willys_website.EventPage', related_name='hero')
-
 
 class EventPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.EventPage', related_name='related_links')
@@ -415,13 +394,6 @@ class EventPage(Page):
     body = RichTextField(blank=True)
     cost = models.CharField(max_length=255)
     signup_link = models.URLField(blank=True)
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
 
     @property
     def event_index(self):
@@ -459,6 +431,4 @@ class EventPage(Page):
         InlinePanel('related_links', label="Related links"),
     ]
 
-    promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
-    ]
+    promote_panels = Page.promote_panels
