@@ -1,9 +1,15 @@
 {% extends "willys_website/base.html" %}
-{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags staticfiles %}
+
+{% load willys_website_tags %}
+
 {% block body_class %}{% endblock %}
-{% block title_postfix %}{% endblock %}
+
 {% block content %}
 
-    {% include 'willys_website/includes/hero.html' with hero=self.hero.all %}
+    {% include 'willys_website/includes/hero.html' with hero=self.hero.all only %}
+
+    {% include 'willys_website/includes/home_promo.html' with promo=self.promo.all only %}
+
+    {% include 'willys_website/includes/home_featured.html' with featured=self.featured.all only %}
 
 {% endblock %}

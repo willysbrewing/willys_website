@@ -9,7 +9,7 @@ if os.getenv('DEBUG') == 'True':
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS=['localhost'] #TODO
+ALLOWED_HOSTS = os.environ['HOST'].split(',')
 
 DATABASES = {
     'default': {
@@ -19,8 +19,10 @@ DATABASES = {
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST'),
         'PORT': os.getenv('DATABASE_PORT'),
+        'CONN_MAX_AGE': 600  # number of seconds database connections should persist for
     }
 }
+
 
 # CACHES = {
 #     "default": {
