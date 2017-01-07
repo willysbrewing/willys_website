@@ -1,0 +1,54 @@
+/* Event Index */
+section.event-index{
+  padding: 0;
+  background: url(../images/pattern5.png);
+}
+
+section.event-index .event-wrapper{
+  padding: 40px 0 20px 0;
+}
+
+section.event-index .event-wrapper > a:hover{
+  background-color: rgba(0,0,0,0.5);
+}
+
+section.event-index .event-wrapper .event{
+  padding: 0;
+}
+
+section.event-index .event-wrapper .event .display{
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
+}
+
+section.event-index .event-wrapper .event .display .text{
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  width: 320px;
+  padding: 80px 40px;
+}
+
+section.event-index .event-wrapper .event .display .text h3{
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  section.event-index .event-wrapper .event .display{
+      height: 240px;
+  }
+  section.event-index .event-wrapper .event .display .text{
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  section.event-index .event-wrapper .event .display{
+      height: 650px;
+  }
+}
+
+/* Event */
+section.event{
+
+}

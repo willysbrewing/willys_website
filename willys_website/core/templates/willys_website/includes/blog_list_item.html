@@ -1,20 +1,37 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
-{# Individual blog item in a list - used on blog index and home page #}
-<a class="list-group-item" href="{% pageurl blog %}">
-  <div class="media">
-    {% if blog.feed_image %}
-      <div class="media-left">
-        {% image blog.feed_image width-200 as img %}
-        <img class="media-object" src="{{ img.url }}" />
-      </div>
-    {% endif %}
-    <div class="media-body">
-      <h4 class="media-heading">{{ blog.title }}</h4>
-      <p><strong>{{ blog.date }}</strong></p>
-      {% if blog.search_description %}
-        <p>{{ blog.search_description }}</p>
-      {% endif %}
+<li class="col-sm-6">
+  <a class="block-link color-black" href="{% pageurl post %}">
+    <div class="card">
+        {% image post.image fill-764x448 as background %}
+        <div class="image">
+            <img src="{{ background.url }}" alt="..."/>
+            <div class="filter">
+            </div>
+        </div>
+        <div class="content">
+            <p class="category text-info">
+              <i class="fa fa-calendar"></i>&nbsp;
+              {% if post.date %}
+                  <span class="date">{{ post.date|date:"j F Y" }}</span>
+              {% endif %}
+            </p>
+            <div>
+                <div class="stats pull-right">
+                    <a class="card-link" href="#">
+                       <i class="fa fa-heart"></i> 92
+                    </a>
+               </div>
+               <div class="stats pull-right">
+                   <a class="card-link" href="#">
+                       <i class="fa fa-comment"></i> 41
+                   </a>
+               </div>
+           </div>
+            <p class="card-link">
+                <h4 class="title">{{ post.title }}</h4>
+            </p>
+        </div>
     </div>
-  </div>
-</a>
+  </a>
+</li>

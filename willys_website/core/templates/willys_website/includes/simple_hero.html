@@ -4,26 +4,23 @@
 {% image heroItem.background fill-1800x978 as imgbanner %}
 
 <!-- hero -->
-<section class="hero header-filter" style="background-image: url({{ imgbanner.url }})">
+<section class="hero simple-hero header-filter" style="background-image: url({{ imgbanner.url }})">
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 {% if heroItem.position == 'right' %}col-sm-offset-6{% endif %}">
+      <div class="col-sm-12">
         <h1 class="title">
           {{ heroItem.title }}
         </h1>
-        <div class="square">
-            <h2 class="subtitle">
-              {{ heroItem.claim }}
-            </h2>
-        </div>
+        {% if heroItem.claim %}
+          <h2 class="subtitle">
+            {{ heroItem.claim }}
+          </h2>
+        {% endif %}
       </div>
     </div>
   </div>
-
 </section>
 <!-- endhero -->
 
-
-</section>
 {% endfor %}

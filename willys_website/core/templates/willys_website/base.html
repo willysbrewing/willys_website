@@ -3,17 +3,29 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es"> <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Willy's{% endblock %}</title>
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
 
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
+        <meta name="author" content="Willy's Brewing" /><!-- @TODO-->
         {% if self.canonical_url %}
             <link rel="canonical" href="{{ self.canonical_url }}" />
         {% endif %}
+        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Willy's{% endblock %}</title>
+
+        <!-- ICONS FIXED @TODO -->
+        <!--<link rel="manifest" href="manifest.json">
+        <link rel="icon" href="favicon.ico">
+        <link rel="icon" type="image/png" href="icons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="icons/favicon-16x16.png" sizes="16x16">
+        <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="384x384"  href="icons/android-icon-384x384.png">
+        <meta name="msapplication-TileColor" content="#9E9E9E">
+        <meta name="msapplication-TileImage" content="icon/android-icon-192x192.png">
+        <meta name="theme-color" content="#9E9E9E">-->
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="">
@@ -35,8 +47,14 @@
         <!-- Latest compiled and minified CSS -->
         {% compress css %}
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/gsdk.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/blog.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/event.css' %}">
         {% endcompress %}
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700|Montserrat" rel="stylesheet">
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,9 +65,14 @@
 
     </head>
     <body class="{% block body_class %}{% endblock %}">
+      <!--[if lt IE 10]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
 
         <!-- Google Tag Manager -->
         <!-- End Google Tag Manager -->
+
+        {% include 'willys_website/includes/old_nav.html' %}
 
         <main>{% spaceless %}{% block content %}{% endblock %}{% endspaceless %}</main>
 

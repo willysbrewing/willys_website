@@ -1,0 +1,180 @@
+'use strict';
+(function() {
+
+    $(function(){
+
+        /* Functions */
+        function getCookie(cname) {
+            var name = cname + '=';
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)===' ') {c = c.substring(1);}
+                if (c.indexOf(name) === 0) {return c.substring(name.length,c.length);}
+            }
+            return '';
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = 'expires='+d.toUTCString();
+            document.cookie = cname + '=' + cvalue + '; ' + expires;
+        }
+
+        function debounce(func, wait, immediate) {
+          var timeout;
+          return function() {
+            var context = this, args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+              timeout = null;
+              if (!immediate) func.apply(context, args);
+            }, wait);
+            if (immediate && !timeout) func.apply(context, args);
+          };
+        }
+
+        var gsdk = {
+            misc:{
+                navbar_menu_visible: 0
+            },
+            initRightMenu: function(){
+                 if(!navbar_initialized){
+                     var $navbar = $('nav').find('.navbar-collapse').first().clone(true);
+
+                     var ul_content = '';
+
+                     $navbar.children('ul').each(function(){
+                        var content_buff = $(this).html();
+                        ul_content = ul_content + content_buff;
+                     });
+
+                    ul_content = '<ul class="nav navbar-nav">' + ul_content + '</ul>';
+                     $navbar.html(ul_content);
+
+                     $('body').append($navbar);
+
+                     var background_image = $navbar.data('nav-image');
+                     if(background_image != undefined){
+                        $navbar.css('background',"url('" + background_image + "')")
+                               .removeAttr('data-nav-image')
+                               .css('background-size',"cover")
+                               .addClass('has-image');
+                     }
+
+
+                     var $toggle = $('.navbar-toggle');
+
+                     $navbar.find('a').removeClass('btn btn-round btn-default');
+                     $navbar.find('button').removeClass('btn-round btn-fill btn-info btn-primary btn-success btn-danger btn-warning btn-neutral');
+                     $navbar.find('button').addClass('btn-simple btn-block');
+
+                    $toggle.click(gsdk.toggleSidebarMenu);
+
+                    navbar_initialized = true;
+                }
+
+            },
+
+            toggleSidebarMenu: function(){
+                if(gsdk.misc.navbar_menu_visible == 1) {
+                    $('html').removeClass('nav-open');
+                    gsdk.misc.navbar_menu_visible = 0;
+                    $('.body-click').remove();
+                     setTimeout(function(){
+                         var $toggle = $('.navbar-toggle');
+                        $toggle.removeClass('toggled');
+                     }, 400);
+
+                } else {
+                    setTimeout(function(){
+                        var $toggle = $('.navbar-toggle');
+                        $toggle.addClass('toggled');
+                    }, 430);
+
+                    var div = '<div class="body-click"></div>';
+                    $(div).appendTo("body").click(function() {
+                        $('html').removeClass('nav-open');
+                        gsdk.misc.navbar_menu_visible = 0;
+                        $('.body-click').remove();
+                         setTimeout(function(){
+                             var $toggle = $('.navbar-toggle');
+                            $toggle.removeClass('toggled');
+                         }, 400);
+                    });
+
+                    $('html').addClass('nav-open');
+                    gsdk.misc.navbar_menu_visible = 1;
+                }
+            },
+
+            checkScrollForTransparentNavbar: debounce(function() {
+                  if($(document).scrollTop() > 100 ) {
+                        if(transparent) {
+                            transparent = false;
+                            $('nav[role="navigation"]').removeClass('navbar-transparent');
+                        }
+                    } else {
+                        if( !transparent ) {
+                            transparent = true;
+                            $('nav[role="navigation"]').addClass('navbar-transparent');
+                        }
+                    }
+            }, 17),
+        }
+
+        var transparent = true;
+        var fixedTop = false;
+        var navbar_initialized = false;
+
+        // (function(){
+        //   function showPolicy(){
+        //     $('.cookies').show();
+        //   }
+        //   if(parseInt(getCookie('wb_p')) !== 1){
+        //     showPolicy();
+        //     setCookie('wb_p', 1, 365);
+        //     $('.cookies .close').click(function() {
+        //       $('.cookies').fadeOut();
+        //     })
+        //   }
+        // })();
+
+        // Do not delay load of page with async functionality: Wait for window load
+        window.addEventListener('load',function(){
+
+            // init smooth links
+            $('a.smooth').click(function(e) {
+                e.preventDefault();
+                var $link = $(this);
+                var anchor = $link.attr('href');
+                $('html, body').stop().animate({
+                    scrollTop : $(anchor).offset().top
+                }, 500);
+                return false;
+            });
+
+            var window_width = $(window).width();
+            var burger_menu = $('nav[role="navigation"]').hasClass('navbar-burger') ? true : false;
+            // Init navigation toggle for small screens
+            if(window_width < 768 || burger_menu){
+                gsdk.initRightMenu();
+            }
+
+            $(window).on('scroll', gsdk.checkScrollForTransparentNavbar);
+
+        }); // End of window load
+
+        $(window).resize(function(){
+            var burger_menu = $('nav[role="navigation"]').hasClass('navbar-burger') ? true : false;
+            if($(window).width() < 768){
+                gsdk.initRightMenu();
+            } else if(!burger_menu && gsdk.misc.navbar_menu_visible){
+                gsdk.toggleSidebarMenu();
+            }
+        });
+
+    }); // End of jQuery context
+
+})(); // End of use strict

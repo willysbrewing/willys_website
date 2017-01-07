@@ -1,18 +1,16 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% for featuredItem in featured %}
-
-<!-- promo -->
-<section id="promo" class="section promo" style="background-color: {{ featuredItem.color }}">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <p class="claim center">{{ featuredItem.text }}</p>
-      </div>
+<!-- fullone -->
+<section class="full bg-white">
+    <div class="row margin0">
+      {% for featuredItem in featured %}
+      {% image featuredItem.background fill-1800x978 as imgfeature %}
+        <div class="col-sm-6 padding0">
+          <div class="display" style="background-image: url({{ imgfeature.url }})"></div>
+        </div>
+      {% endfor %}
     </div>
-  </div>
 </section>
-<!-- endpromo -->
+<!-- endfullone -->
 
 </section>
-{% endfor %}
