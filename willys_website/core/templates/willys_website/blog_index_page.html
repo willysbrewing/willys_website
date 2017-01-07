@@ -11,7 +11,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 col-sm-12">
+          <div class="col-sm-12">
             <ul class="list row">
             {% for post in blog_posts %}
                 {% include "willys_website/includes/blog_list_item.html" %}
@@ -44,5 +44,7 @@
     </div>
 
     {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+    {% include "willys_website/includes/social_line.html"  %}
 
 {% endblock %}

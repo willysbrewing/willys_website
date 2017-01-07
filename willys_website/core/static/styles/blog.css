@@ -1,6 +1,6 @@
 /* Blog Index */
 section.blog-index{
-
+  background: url(../images/pattern5.png);
 }
 
 section.blog-index ul.list{
@@ -9,8 +9,8 @@ section.blog-index ul.list{
 
 section.blog-index ul.list li{
   list-style-type: none;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 section.blog-index ul.list li .content .image-container{

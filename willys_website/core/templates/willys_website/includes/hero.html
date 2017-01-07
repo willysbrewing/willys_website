@@ -9,17 +9,18 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 {% if heroItem.position == 'right' %}col-sm-offset-6{% endif %}">
-        <h1 id="header-title" class="title">
-          <p><span class="font-brand">{{ heroItem.title }}</span></p>
+        <h1 class="title">
+          {{ heroItem.title }}
         </h1>
         <div class="square">
-            <h2 id="header-subtitle" class="subtitle">
-              <p>{{ heroItem.claim }}</p>
+            <h2 class="subtitle">
+              {{ heroItem.claim }}
             </h2>
         </div>
       </div>
     </div>
   </div>
+
 </section>
 <!-- endhero -->
 

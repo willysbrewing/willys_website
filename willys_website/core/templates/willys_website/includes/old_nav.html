@@ -1,8 +1,8 @@
 {% load static %}
 
 <!-- navbar -->
-<div id="main-nav" class="navbar navbar-fixed-top">
-  <div class="container-fluid">
+<!--<div id="main-nav" class="navbar navbar-fixed-top">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="icon-bar"></span>
@@ -21,5 +21,30 @@
       </ul>
     </div>
   </div>
-</div>
+</div>-->
 <!-- endnavbar -->
+
+<nav class="navbar navbar-ct-black navbar-transparent navbar-fixed-top" role="navigation">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="white-logo" alt="Willy's Brewing" src="{% static 'images/willys_white.png' %}">
+      </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class=""><a href="/beer">Cervezas</a></li>
+        <li class=""><a href="/blog">Blog</a></li>
+        <li><a href="/nights" class="btn btn-block btn-lg btn-default">Willy's Nights</a></li>
+       </ul>
+    </div>
+  </div>
+</nav>

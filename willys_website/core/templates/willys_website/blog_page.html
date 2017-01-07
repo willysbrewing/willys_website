@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
+    {% include "willys_website/includes/simple_hero.html" with hero=self.hero only %}
 
     <!-- blog-post -->
     <section class="blog-post">
@@ -26,14 +26,20 @@
           </div>
         </div>
 
-        {% if self.body %}
-          {% include "willys_website/includes/streamfield.html" with content=self.body %}
-        {% endif %}
+        <div class="row">
+          <div class="col-sm-12">
+            {% if self.body %}
+              {% include "willys_website/includes/streamfield.html" with content=self.body %}
+            {% endif %}
+          </div>
+        </div>
 
       </div>
     </section>
     <!-- endblogpost -->
 
     {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+    {% include "willys_website/includes/social_line.html"  %}
 
 {% endblock %}

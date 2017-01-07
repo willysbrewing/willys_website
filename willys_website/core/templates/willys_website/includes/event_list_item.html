@@ -1,19 +1,22 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<li class="col-sm-6">
-  <a class="block-link color-black" href="{% pageurl event %}">
-    <article class="content">
-      {% image event.image fill-764x448 as background %}
-      <div class="image-container" style="background-image: url('{{ background.url }}');"></div>
-      <div class="blog-text">
-          <div>
-            <h3>{{ event.title }}</h3>
-            <p><strong>{{ event.date_from }} a las {{ event.time_from }}</strong></p>
-            {% if event.search_description %}
-              <p>{{ event.search_description }}</p>
-            {% endif %}
-          </div>
-      </div>
-    </article>
+<div class="event-wrapper">
+  <a href="{% pageurl event %}">
+    <section class="event bg-white">
+        <div class="row margin0">
+          {% image event.image fill-1800x978 as background %}
+            <div class="col-sm-12 padding0">
+              <div class="display" style="background-image: url({{ background.url }})">
+                <div class="text pull-left">
+                  <h3>{{ event.title }}</h3>
+                  <p>{{ event.date_from }} a las {{ event.time_from }}</p>
+                  {% if event.search_description %}
+                    <p>{{ event.search_description }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
   </a>
-</li>
+</div>

@@ -1,19 +1,37 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<li class="col-sm-12">
+<li class="col-sm-6">
   <a class="block-link color-black" href="{% pageurl post %}">
-    <article class="content">
-      {% image post.image fill-764x448 as background %}
-      <div class="image-container" style="background-image: url('{{ background.url }}');"></div>
-      <div class="blog-text">
-          <div>
-              <h3>{{ post.title }}</h3>
-
+    <div class="card">
+        {% image post.image fill-764x448 as background %}
+        <div class="image">
+            <img src="{{ background.url }}" alt="..."/>
+            <div class="filter">
+            </div>
+        </div>
+        <div class="content">
+            <p class="category text-info">
+              <i class="fa fa-calendar"></i>&nbsp;
               {% if post.date %}
                   <span class="date">{{ post.date|date:"j F Y" }}</span>
               {% endif %}
-          </div>
-      </div>
-    </article>
+            </p>
+            <div>
+                <div class="stats pull-right">
+                    <a class="card-link" href="#">
+                       <i class="fa fa-heart"></i> 92
+                    </a>
+               </div>
+               <div class="stats pull-right">
+                   <a class="card-link" href="#">
+                       <i class="fa fa-comment"></i> 41
+                   </a>
+               </div>
+           </div>
+            <p class="card-link">
+                <h4 class="title">{{ post.title }}</h4>
+            </p>
+        </div>
+    </div>
   </a>
 </li>

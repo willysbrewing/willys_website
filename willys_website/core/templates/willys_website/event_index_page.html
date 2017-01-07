@@ -8,24 +8,15 @@
 
     <!-- event-index -->
     <section class="event-index">
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            {% with self.events.all as events %}
-              {% if events %}
-                <ul class="list">
-                {% for event in events %}
-                    {% include "willys_website/includes/event_list_item.html" %}
-                {% empty %}
-                    No blog found
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
-          </div>
-        </div>
-      </div>
+      {% with self.events.all as events %}
+        {% if events %}
+          {% for event in events %}
+              {% include "willys_website/includes/event_list_item.html" %}
+          {% empty %}
+              No Events found
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </section>
     <!-- endeventindex -->
 

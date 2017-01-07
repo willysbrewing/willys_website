@@ -301,9 +301,6 @@ class BlogIndexPage(Page):
 ################# Blog Page ######################################
 ##################################################################
 
-class BlogPageHeroItem(Orderable, HeroItem):
-    page = ParentalKey('willys_website.BlogPage', related_name='hero')
-
 class BlogPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.BlogPage', related_name='related_links')
 
@@ -317,6 +314,18 @@ class BlogPage(Page):
     body = StreamField(GenericStreamBlock())
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField('Post date')
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    @property
+    def hero(self):
+        hero = [{'title': self.title, 'background': self.image}]
+        return hero
 
     @property
     def blog_index(self):
@@ -329,14 +338,9 @@ class BlogPage(Page):
        # just return first blog index in database
        return BlogIndexPage.objects.first()
 
-    @property
-    def image(self):
-       hero = self.hero.all()
-       return hero[0].background
-
     content_panels = Page.content_panels + [
+        ImageChooserPanel('image'),
         FieldPanel('date'),
-        InlinePanel('hero', label='Hero'),
         StreamFieldPanel('body'),
         InlinePanel('related_links', label='Related links'),
     ]
@@ -379,9 +383,6 @@ class EventIndexPage(Page):
 ################# Event Page #####################################
 ##################################################################
 
-class EventPageHeroItem(Orderable, HeroItem):
-    page = ParentalKey('willys_website.EventPage', related_name='hero')
-
 class EventPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.EventPage', related_name='related_links')
 
@@ -390,37 +391,35 @@ class EventPage(Page):
     subpage_types = [] # No Children
 
     date_from = models.DateField('Start date')
-    date_to = models.DateField(
-        'End date',
-        null=True,
-        blank=True,
-        help_text='Not required if event is on a single day'
-    )
     time_from = models.TimeField('Start time', default=None)
-    time_to = models.TimeField('End time', null=True, blank=True)
     location = models.CharField(max_length=255)
     body = StreamField(GenericStreamBlock())
     cost = models.CharField(max_length=255)
     signup_link = models.URLField(blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    @property
+    def hero(self):
+        hero = [{'title': self.title, 'background': self.image}]
+        return hero
 
     @property
     def event_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
 
-    @property
-    def image(self):
-       hero = self.hero.all()
-       return hero[0].background
-
     content_panels = Page.content_panels + [
+        ImageChooserPanel('image'),
         FieldPanel('date_from'),
-        FieldPanel('date_to'),
         FieldPanel('time_from'),
-        FieldPanel('time_to'),
         FieldPanel('location'),
         FieldPanel('cost'),
-        InlinePanel('hero', label='Hero'),
         StreamFieldPanel('body'),
         FieldPanel('signup_link'),
         InlinePanel('related_links', label='Related links'),
