@@ -1,24 +1,19 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<li {% if post.colour %}class="list-group-item {{ post.colour }}"{% endif %}>
-    <a class="block-link" href="{% pageurl post %}" style="color: black;">
-        <div class="content">
-            {% image post.image fill-764x448 as background %}
-            <div class="image-container" {% if not post.colour %}style="background-image: url('{{ background.url }}');"{% endif %}></div>
-            <div class="blog-text">
-                <div id="author" class="author clearfix" >
-                    <label>Blog</label>
-                    <h3>{{ post.title }}</h3>
+<li class="col-sm-12">
+  <a class="block-link color-black" href="{% pageurl post %}">
+    <article class="content">
+      {% image post.image fill-764x448 as background %}
+      <div class="image-container" style="background-image: url('{{ background.url }}');"></div>
+      <div class="blog-text">
+          <div>
+              <h3>{{ post.title }}</h3>
 
-                    {% for author in post.related_author.all %}
-                        <div class="name">{{ author.author.title }}{% if not forloop.last %},&nbsp;{% endif %}</div>
-                    {% endfor %}
-
-                    {% if post.date %}
-                        <span class="date">{{ post.date|date:"j F Y" }}</span>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </a>
+              {% if post.date %}
+                  <span class="date">{{ post.date|date:"j F Y" }}</span>
+              {% endif %}
+          </div>
+      </div>
+    </article>
+  </a>
 </li>

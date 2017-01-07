@@ -1,0 +1,40 @@
+{% extends "willys_website/base.html" %}
+{% load willys_website_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+  {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
+
+  <!-- event -->
+  <section class="event">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="pull-left">
+            {{ self.title }}<br>
+            <small>{{ self.date_from }}{% if self.date_to %} to {{ self.date_to }}{% endif %}
+            {% if self.time_from %}{{ self.time_from|time }}{% endif %}{% if self.time_to %} to {{ self.time_to|time }}{% endif %} </small>
+          </h2>
+          <div class="pull-right">
+            {% if self.location %}<p><i class="glyphicon glyphicon-map-marker"></i> {{ self.location }}</p>{% endif %}
+            {% if self.cost %}
+                <p><i class="glyphicon glyphicon-euro"></i> {{ self.cost|safe }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB4TdPdkmQz0PJR7eU6V7ARf5l1bdnLbxU&q=Madrid" allowfullscreen>
+      </iframe>
+
+      {% if self.body %}
+        {% include "willys_website/includes/streamfield.html" with content=self.body %}
+      {% endif %}
+
+    </div>
+  </section>
+
+  {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+{% endblock %}

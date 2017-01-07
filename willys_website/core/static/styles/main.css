@@ -311,8 +311,8 @@ ul{
 }
 
 /* Section */
-.section{
-    padding: 80px 0;
+section{
+    padding: 40px 0;
 }
 
 /* Hero */
@@ -405,9 +405,9 @@ section.hero.simple-hero {
   background-size: cover;
   background-attachment: fixed;
   background-position: center center;
-  min-height: 320px;
-  max-height: 320px;
-  height: 320px;
+  min-height: 480px;
+  max-height: 480px;
+  height: 480px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -540,4 +540,44 @@ footer .copyright{
   footer .generic .footer-section{
     padding: 10px 0;
   }
+}
+
+/* Streamfield */
+.streamfield{
+  margin: 20px 0;
+}
+
+.streamfield p{
+  font-size: 16px; }
+}
+
+.streamfield h2{
+  text-align: left;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.streamfield ul{
+
+}
+
+.streamfield li{
+  font-size: 16px;
+  font-weight: 400;
+  list-style-type: square;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.streamfield blockquote {
+  position: relative;
+  padding: 20px;
+  margin: 30px 0;
+  z-index: 1;
+}
+
+.streamfield img {
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
 }

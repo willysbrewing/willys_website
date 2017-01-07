@@ -31,11 +31,11 @@ from taggit.models import TaggedItemBase
 ##################################################################
 
 class PullQuoteBlock(StructBlock):
-    quote = TextBlock("quote title")
+    quote = TextBlock('quote title')
     attribution = CharBlock()
 
     class Meta:
-        icon = "openquote"
+        icon = 'openquote'
 
 
 class ImageFormatChoiceBlock(FieldBlock):
@@ -61,26 +61,26 @@ class AlignedHTMLBlock(StructBlock):
     alignment = HTMLAlignmentChoiceBlock()
 
     class Meta:
-        icon = "code"
+        icon = 'code'
 
 
-class blogtreamBlock(StreamBlock):
-    h2 = CharBlock(icon="title", classname="title")
-    h3 = CharBlock(icon="title", classname="title")
-    h4 = CharBlock(icon="title", classname="title")
-    intro = RichTextBlock(icon="pilcrow")
-    paragraph = RichTextBlock(icon="pilcrow")
-    aligned_image = ImageBlock(label="Aligned image", icon="image")
+class GenericStreamBlock(StreamBlock):
+    h2 = CharBlock(icon='title', classname='title')
+    h3 = CharBlock(icon='title', classname='title')
+    h4 = CharBlock(icon='title', classname='title')
+    intro = RichTextBlock(icon='pilcrow')
+    paragraph = RichTextBlock(icon='pilcrow')
+    aligned_image = ImageBlock(label='Aligned image', icon='image')
     pullquote = PullQuoteBlock()
-    aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
-    document = DocumentChooserBlock(icon="doc-full-inverse")
+    aligned_html = AlignedHTMLBlock(icon='code', label='Raw HTML')
+    document = DocumentChooserBlock(icon='doc-full-inverse')
 
 ##################################################################
 ########### Abstract classes #####################################
 ##################################################################
 
 class LinkFields(models.Model):
-    link_external = models.URLField("External link", blank=True)
+    link_external = models.URLField('External link', blank=True)
     link_page = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -166,11 +166,11 @@ class HeroItem(LinkFields):
 ##################################################################
 
 class RelatedLink(LinkFields):
-    title = models.CharField(max_length=255, help_text="Link title")
+    title = models.CharField(max_length=255, help_text='Link title')
 
     panels = [
         FieldPanel('title'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
+        MultiFieldPanel(LinkFields.panels, 'Link'),
     ]
 
     class Meta:
@@ -191,7 +191,7 @@ class HomePagePromo(Orderable, LinkFields):
         null=True,
         blank=True,
         validators=[RegexValidator(regex='^#(?:[0-9a-fA-F]{3}){1,2}$')],
-        help_text="Background Color Hex #ffffff")
+        help_text='Background Color Hex #ffffff')
 
     panels = [
         FieldPanel('text'),
@@ -218,13 +218,15 @@ class HomePageFeatured(Orderable, LinkFields):
 
 class HomePage(Page):
 
+    parent_page_types = [] # Nothing can have a homepage as a child
+
     class Meta:
-        verbose_name = "Homepage"
+        verbose_name = 'Homepage'
 
     content_panels = Page.content_panels + [
-        InlinePanel('hero', label="Hero"),
-        InlinePanel('promo', label="Promo"),
-        InlinePanel('featured', label="Featured"),
+        InlinePanel('hero', label='Hero'),
+        InlinePanel('promo', label='Promo'),
+        InlinePanel('featured', label='Featured'),
     ]
 
     promote_panels = Page.promote_panels
@@ -239,7 +241,7 @@ class HomePage(Page):
 #
 # class StandardPage(Page):
 #     content_panels = Page.content_panels + [
-#         InlinePanel('hero', label="Hero"),
+#         InlinePanel('hero', label='Hero'),
 #     ]
 #
 #     promote_panels = Page.promote_panels + [
@@ -254,6 +256,7 @@ class BlogIndexPageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.BlogIndexPage', related_name='hero')
 
 class BlogIndexPage(Page):
+    subpage_types = ['willys_website.BlogPage'] # Children can only be BlogPage
 
     @property
     def blog_posts(self):
@@ -264,19 +267,18 @@ class BlogIndexPage(Page):
         blog_posts = blog_posts.order_by('-date')
         return blog_posts
 
-    def serve(self, request):
-        # Get blog_posts
+    def get_context(self, request):
+        # Get blogs
         blog_posts = self.blog_posts
 
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
-            blog_posts = blog_posts.filter(tags__tag__slug=tag)
+            blog_posts = blog_posts.filter(tags__name=tag)
 
         # Pagination
-        per_page = 12
         page = request.GET.get('page')
-        paginator = Paginator(blog_posts, per_page)  # Show 10 blog_posts per page
+        paginator = Paginator(blog_posts, 10)  # Show 10 blogs per page
         try:
             blog_posts = paginator.page(page)
         except PageNotAnInteger:
@@ -284,14 +286,13 @@ class BlogIndexPage(Page):
         except EmptyPage:
             blog_posts = paginator.page(paginator.num_pages)
 
-        return render(request, self.template, {
-            'self': self,
-            'blog_posts': blog_posts,
-            'per_page': per_page,
-        })
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['blog_posts'] = blog_posts
+        return context
 
     content_panels = Page.content_panels + [
-        InlinePanel('hero', label="Hero"),
+        InlinePanel('hero', label='Hero'),
     ]
 
     promote_panels = Page.promote_panels
@@ -310,9 +311,12 @@ class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('willys_website.BlogPage', related_name='tagged_items')
 
 class BlogPage(Page):
-    body = StreamField(blogtreamBlock())
+    parent_page_types = ['willys_website.BlogIndexPage'] # Parent can only be a BlogIndex
+    subpage_types = [] # No Children
+
+    body = StreamField(GenericStreamBlock())
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
-    date = models.DateField("Post date")
+    date = models.DateField('Post date')
 
     @property
     def blog_index(self):
@@ -332,9 +336,9 @@ class BlogPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
+        InlinePanel('hero', label='Hero'),
         StreamFieldPanel('body'),
-        InlinePanel('hero', label="Hero"),
-        InlinePanel('related_links', label="Related links"),
+        InlinePanel('related_links', label='Related links'),
     ]
 
     promote_panels = Page.promote_panels + [
@@ -349,6 +353,7 @@ class EventIndexPageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.EventIndexPage', related_name='hero')
 
 class EventIndexPage(Page):
+    subpage_types = ['willys_website.EventPage'] # Children can only be EventPage
 
     @property
     def events(self):
@@ -365,7 +370,7 @@ class EventIndexPage(Page):
         return events
 
     content_panels = Page.content_panels + [
-        InlinePanel('hero', label="Hero"),
+        InlinePanel('hero', label='Hero'),
     ]
 
     promote_panels = Page.promote_panels
@@ -381,17 +386,20 @@ class EventPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.EventPage', related_name='related_links')
 
 class EventPage(Page):
-    date_from = models.DateField("Start date")
+    parent_page_types = ['willys_website.EventIndexPage'] # Parent can only be a EventIndex
+    subpage_types = [] # No Children
+
+    date_from = models.DateField('Start date')
     date_to = models.DateField(
-        "End date",
+        'End date',
         null=True,
         blank=True,
-        help_text="Not required if event is on a single day"
+        help_text='Not required if event is on a single day'
     )
-    time_from = models.TimeField("Start time", null=True, blank=True)
-    time_to = models.TimeField("End time", null=True, blank=True)
+    time_from = models.TimeField('Start time', default=None)
+    time_to = models.TimeField('End time', null=True, blank=True)
     location = models.CharField(max_length=255)
-    body = RichTextField(blank=True)
+    body = StreamField(GenericStreamBlock())
     cost = models.CharField(max_length=255)
     signup_link = models.URLField(blank=True)
 
@@ -400,23 +408,10 @@ class EventPage(Page):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
 
-    def serve(self, request):
-        if "format" in request.GET:
-            if request.GET['format'] == 'ical':
-                # Export to ical format
-                response = HttpResponse(
-                    export_event(self, 'ical'),
-                    content_type='text/calendar',
-                )
-                response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
-                return response
-            else:
-                # Unrecognised format error
-                message = 'Could not export event\n\nUnrecognised format: ' + request.GET['format']
-                return HttpResponse(message, content_type='text/plain')
-        else:
-            # Display event page as usual
-            return super(EventPage, self).serve(request)
+    @property
+    def image(self):
+       hero = self.hero.all()
+       return hero[0].background
 
     content_panels = Page.content_panels + [
         FieldPanel('date_from'),
@@ -425,10 +420,10 @@ class EventPage(Page):
         FieldPanel('time_to'),
         FieldPanel('location'),
         FieldPanel('cost'),
+        InlinePanel('hero', label='Hero'),
+        StreamFieldPanel('body'),
         FieldPanel('signup_link'),
-        InlinePanel('hero', label="Hero"),
-        FieldPanel('body', classname="full"),
-        InlinePanel('related_links', label="Related links"),
+        InlinePanel('related_links', label='Related links'),
     ]
 
     promote_panels = Page.promote_panels

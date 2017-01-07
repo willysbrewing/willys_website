@@ -6,25 +6,27 @@
 
     {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
 
-    <!-- hero -->
+    <!-- blog-index -->
     <section class="blog-index">
 
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-md-offset-2 col-sm-12">
+            <ul class="list row">
             {% for post in blog_posts %}
                 {% include "willys_website/includes/blog_list_item.html" %}
             {% empty %}
                 No blog found
             {% endfor %}
+            </ul>
           </div>
         </div>
       </div>
     </section>
-    <!-- endhero -->
+    <!-- endblogindex -->
 
     <div>
-      <div class="container pagination">
+      <div class="container">
           {# Pagination #}
           {# Append any other url query string variables to the next and previous links - allows tag to be passed through #}
           <div class="previous">

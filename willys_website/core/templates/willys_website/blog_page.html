@@ -5,30 +5,35 @@
 
     {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
 
-    <div class="page-header">
+    <!-- blog-post -->
+    <section class="blog-post">
 
-      <div class="pull-right">
-        {% for tag in self.tags.all %}
-          <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
-             class="btn btn-primary btn-xs">
-            <i class="glyphicon glyphicon-tag"></i> {{ tag }}
-          </a>
-        {% endfor %}
-      </div>
-
-      <h2>
-        {{ self.title }}
-        {% if self.date %}<small>{{ self.date }}</small>{% endif %}
-      </h2>
-
-    </div>
-
-    {% if self.body %}
-        <div class="body-content">
-            {% include "willys_website/includes/streamfield.html" with content=self.body %}
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="pull-left">
+              {{ self.title }}<br>
+              {% if self.date %}<small>{{ self.date }}</small>{% endif %}
+            </h2>
+            <div class="pull-right">
+              {% for tag in self.tags.all %}
+                <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
+                   class="btn btn-primary btn-xs">
+                  <i class="glyphicon glyphicon-tag"></i> {{ tag }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-    {% endif %}
+
+        {% if self.body %}
+          {% include "willys_website/includes/streamfield.html" with content=self.body %}
+        {% endif %}
+
+      </div>
+    </section>
+    <!-- endblogpost -->
 
     {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
-    
+
 {% endblock %}

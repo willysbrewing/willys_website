@@ -1,0 +1,34 @@
+{% extends "willys_website/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
+
+    <!-- event-index -->
+    <section class="event-index">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            {% with self.events.all as events %}
+              {% if events %}
+                <ul class="list">
+                {% for event in events %}
+                    {% include "willys_website/includes/event_list_item.html" %}
+                {% empty %}
+                    No blog found
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- endeventindex -->
+
+    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+{% endblock %}

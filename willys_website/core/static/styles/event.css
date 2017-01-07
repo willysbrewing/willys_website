@@ -1,19 +1,19 @@
-/* Blog Index */
-section.blog-index{
+/* Event Index */
+section.event-index{
 
 }
 
-section.blog-index ul.list{
+section.event-index ul.list{
   list-style-type: none;
 }
 
-section.blog-index ul.list li{
+section.event-index ul.list li{
   list-style-type: none;
   padding: 20px;
-  margin: 20px 0;
+  margin: 40px 0;
 }
 
-section.blog-index ul.list li .content .image-container{
+section.event-index ul.list li .content .image-container{
   background-size: cover;
   background-position: center center;
   min-height: 200px;
@@ -24,7 +24,7 @@ section.blog-index ul.list li .content .image-container{
   text-align: left;
 }
 
-/* Blog Post */
-section.blog-post{
+/* Event */
+section.event{
 
 }

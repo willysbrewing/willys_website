@@ -1,0 +1,19 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<li class="col-sm-6">
+  <a class="block-link color-black" href="{% pageurl event %}">
+    <article class="content">
+      {% image event.image fill-764x448 as background %}
+      <div class="image-container" style="background-image: url('{{ background.url }}');"></div>
+      <div class="blog-text">
+          <div>
+            <h3>{{ event.title }}</h3>
+            <p><strong>{{ event.date_from }} a las {{ event.time_from }}</strong></p>
+            {% if event.search_description %}
+              <p>{{ event.search_description }}</p>
+            {% endif %}
+          </div>
+      </div>
+    </article>
+  </a>
+</li>
