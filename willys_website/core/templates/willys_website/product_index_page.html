@@ -1,0 +1,27 @@
+{% extends "willys_website/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
+
+    <!-- event-index -->
+    <section class="product-index">
+      <div class="row">
+        {% with self.products.all as products %}
+          {% if products %}
+            {% for product in products %}
+                {% include "willys_website/includes/product_list_item.html" %}
+            {% empty %}
+                No Events found
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+    </section>
+    <!-- endeventindex -->
+
+    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+{% endblock %}

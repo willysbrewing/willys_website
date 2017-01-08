@@ -1,0 +1,27 @@
+{% extends "willys_website/base.html" %}
+{% load willys_website_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+    {% include "willys_website/includes/product_hero.html" with hero=self.new_hero only %}
+
+    <!-- product -->
+    <section class="product">
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-12">
+            {% if self.body %}
+              {% include "willys_website/includes/streamfield.html" with content=self.body %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- endproduct -->
+
+    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+
+{% endblock %}
