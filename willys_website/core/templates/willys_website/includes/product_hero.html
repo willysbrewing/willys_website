@@ -1,0 +1,36 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% for heroItem in hero %}
+
+<style>
+    {% if heroItem.color %}
+    section.hero.product-hero:before {
+      background: {{ heroItem.color }};
+      background: -moz-linear-gradient(160deg,  {{ heroItem.color }} 0%, #000000 100%);
+      background: -webkit-linear-gradient(160deg,  {{ heroItem.color }} 0%,#000000 100%);
+      background: linear-gradient(160deg, {{ heroItem.color }} 0%, #000000 100%);
+    }
+    {% endif %}
+</style>
+
+<!-- hero -->
+<section class="hero product-hero">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1 class="title">
+          {{ heroItem.name }}
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        {% image heroItem.image width-800 as image %}
+        <img class="image img-responsive center" src="{{ image.url }}" alt=""/>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- endhero -->
+
+{% endfor %}

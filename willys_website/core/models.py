@@ -218,7 +218,7 @@ class HomePageFeatured(Orderable, LinkFields):
 
 class HomePage(Page):
 
-    parent_page_types = [] # Nothing can have a homepage as a child
+    #parent_page_types = [] # Nothing can have a homepage as a child
 
     class Meta:
         verbose_name = 'Homepage'
@@ -422,6 +422,79 @@ class EventPage(Page):
         FieldPanel('cost'),
         StreamFieldPanel('body'),
         FieldPanel('signup_link'),
+        InlinePanel('related_links', label='Related links'),
+    ]
+
+    promote_panels = Page.promote_panels
+
+##################################################################
+################# Product Index Page #############################
+##################################################################
+
+class ProductIndexPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.ProductIndexPage', related_name='hero')
+
+class ProductIndexPage(Page):
+    subpage_types = ['willys_website.ProductPage'] # Children can only be ProductPage
+
+    @property
+    def products(self):
+        # Get list of live event pages that are descendants of this page
+        products = ProductPage.objects.live().descendant_of(self)
+        return products
+
+    content_panels = Page.content_panels + [
+        InlinePanel('hero', label='Hero'),
+    ]
+
+    promote_panels = Page.promote_panels
+
+##################################################################
+################# Product Page ###################################
+##################################################################
+
+class ProductPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.ProductPage', related_name='hero')
+
+class ProductPageRelatedLink(Orderable, RelatedLink):
+    page = ParentalKey('willys_website.ProductPage', related_name='related_links')
+
+class ProductPage(Page):
+    parent_page_types = ['willys_website.ProductIndexPage'] # Parent can only be a ProductIndex
+    subpage_types = [] # No Children
+
+    name = models.CharField(max_length=255, default=False)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    color = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        validators=[RegexValidator(regex='^#(?:[0-9a-fA-F]{3}){1,2}$')],
+        help_text='Background Color Hex #ffffff')
+    cost = models.CharField(max_length=255)
+    body = StreamField(GenericStreamBlock())
+
+    @property
+    def new_hero(self):
+        hero = [{'name': self.name, 'image': self.image, 'color': self.color}]
+        return hero
+
+    @property
+    def product_index(self):
+        return self.get_ancestors().type(ProductIndexPage).last()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        ImageChooserPanel('image'),
+        FieldPanel('color'),
+        FieldPanel('cost'),
+        StreamFieldPanel('body'),
         InlinePanel('related_links', label='Related links'),
     ]
 

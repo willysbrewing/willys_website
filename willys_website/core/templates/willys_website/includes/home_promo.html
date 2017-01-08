@@ -6,9 +6,9 @@
     {% if promoItem.color %}
     section.promo {
       background: {{ promoItem.color }};
-      background: -moz-linear-gradient(45deg,  {{ promoItem.color }} 0%, #000000 100%);
-      background: -webkit-linear-gradient(45deg,  {{ promoItem.color }} 0%,#000000 100%);
-      background: linear-gradient(45deg,  {{ promoItem.color }} 0%,#000000 100%);
+      background: -moz-linear-gradient(160deg,  {{ promoItem.color }} 0%, #000000 100%);
+      background: -webkit-linear-gradient(160deg,  {{ promoItem.color }} 0%,#000000 100%);
+      background: linear-gradient(160deg, {{ promoItem.color }} 0%, #000000 100%);
     }
     {% endif %}
 </style>
@@ -28,5 +28,4 @@
 </section>
 <!-- endpromo -->
 
-</section>
 {% endfor %}

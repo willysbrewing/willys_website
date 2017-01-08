@@ -1,0 +1,52 @@
+/* product Index */
+section.product-index{
+  padding: 0;
+  background: url(../images/pattern5.png);
+}
+
+section.product-index .product-wrapper{
+  padding: 40px 0 20px 0;
+}
+
+section.product-index .product-wrapper > a:hover{
+  background-color: rgba(0,0,0,0.5);
+}
+
+section.product-index .product-wrapper .product{
+  padding: 0;
+}
+
+section.product-index .product-wrapper .product .display{
+  height: 450px;
+}
+
+section.product-index .product-wrapper .product .display .text{
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  width: 320px;
+  padding: 80px 40px;
+}
+
+section.product-index .product-wrapper .product .display .text h3{
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  section.product-index .product-wrapper .product .display{
+      height: 240px;
+  }
+  section.product-index .product-wrapper .product .display .text{
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  section.product-index .product-wrapper .product .display{
+      height: 650px;
+  }
+}
+
+/* product */
+section.product{
+
+}
