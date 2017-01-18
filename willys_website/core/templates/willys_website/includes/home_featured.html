@@ -5,9 +5,11 @@
     <div class="row margin0">
       {% for featuredItem in featured %}
       {% image featuredItem.background fill-1800x978 as imgfeature %}
+      <a href="/">
         <div class="col-sm-6 padding0">
           <div class="display" style="background-image: url({{ imgfeature.url }})"></div>
         </div>
+      </a>
       {% endfor %}
     </div>
 </section>

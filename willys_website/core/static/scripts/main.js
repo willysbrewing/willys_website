@@ -22,19 +22,6 @@
             document.cookie = cname + '=' + cvalue + '; ' + expires;
         }
 
-        function debounce(func, wait, immediate) {
-          var timeout;
-          return function() {
-            var context = this, args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(function() {
-              timeout = null;
-              if (!immediate) func.apply(context, args);
-            }, wait);
-            if (immediate && !timeout) func.apply(context, args);
-          };
-        }
-
         var gsdk = {
             misc:{
                 navbar_menu_visible: 0
@@ -107,25 +94,10 @@
                     $('html').addClass('nav-open');
                     gsdk.misc.navbar_menu_visible = 1;
                 }
-            },
-
-            checkScrollForTransparentNavbar: debounce(function() {
-                  if($(document).scrollTop() > 100 ) {
-                        if(transparent) {
-                            transparent = false;
-                            $('nav[role="navigation"]').removeClass('navbar-transparent');
-                        }
-                    } else {
-                        if( !transparent ) {
-                            transparent = true;
-                            $('nav[role="navigation"]').addClass('navbar-transparent');
-                        }
-                    }
-            }, 17),
+            }
         }
 
-        var transparent = true;
-        var fixedTop = false;
+        var fixedTop = true;
         var navbar_initialized = false;
 
         // (function(){
@@ -161,8 +133,6 @@
             if(window_width < 768 || burger_menu){
                 gsdk.initRightMenu();
             }
-
-            $(window).on('scroll', gsdk.checkScrollForTransparentNavbar);
 
         }); // End of window load
 
