@@ -4,23 +4,23 @@
 
 <style>
     {% if promoItem.color %}
-    section.promo {
+    /*section.promo {
       background: {{ promoItem.color }};
       background: -moz-linear-gradient(160deg,  {{ promoItem.color }} 0%, #000000 100%);
       background: -webkit-linear-gradient(160deg,  {{ promoItem.color }} 0%,#000000 100%);
       background: linear-gradient(160deg, {{ promoItem.color }} 0%, #000000 100%);
-    }
+    }*/
     {% endif %}
 </style>
 
 <!-- promo -->
-<section class="promo">
+<section class="promo bg-white color-black">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <p class="claim center">{{ promoItem.text }}</p>
         <div class="margin-20">
-          <a href="" class="btn btn-lg btn-default color-white center">CONOCE MÁS</a>
+          <a href="" class="btn btn-lg btn-default center color-black">CONOCE MÁS</a>
         </div>
       </div>
     </div>
