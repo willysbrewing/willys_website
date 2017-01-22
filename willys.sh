@@ -10,7 +10,7 @@ case "$1" in
         python manage.py makemigrations willys_website && python manage.py migrate production
         ;;
     deploy)
-        pip install -r requirements.txt && python manage.py bower_install --allow-root && python manage.py collectstatic --noinput --clear && supervisorctl restart uwsgi-willys
+        pip install -r requirements.txt && python manage.py bower_install --allow-root && python manage.py collectstatic --noinput --clear && supervisorctl restart uwsgi_willys
         ;;
   *)
         echo "Usage: willys.sh {develop|deploy|migrate}" >&2
