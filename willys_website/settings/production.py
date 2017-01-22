@@ -38,6 +38,10 @@ CACHES = {
     }
 }
 
+COMPRESS_ENABLED=True
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS=['compressor.filters.jsmin.JSMinFilter']
+
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'https://www.willysbrewing.com'
