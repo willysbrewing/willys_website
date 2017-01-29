@@ -11,10 +11,10 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <h2 class="pull-left">
+            <!--<h2 class="pull-left">
               {{ self.title }}<br>
               {% if self.date %}<small>{{ self.date }}</small>{% endif %}
-            </h2>
+            </h2>-->
             <div class="pull-right">
               {% for tag in self.tags.all %}
                 <a href="{% pageurl self.blog_index %}?tag={{ tag }}"
@@ -38,6 +38,6 @@
     </section>
     <!-- endblogpost -->
 
-    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+    <!--{% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}-->
 
 {% endblock %}

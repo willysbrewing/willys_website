@@ -72,12 +72,17 @@
 
         <!-- Google Tag Manager -->
         <!-- End Google Tag Manager -->
-
-        {% include 'willys_website/includes/old_nav.html' %}
+        {% if self.nav == False %}
+        {% else %}
+          {% include 'willys_website/includes/old_nav.html' %}
+        {% endif %}
 
         <main>{% spaceless %}{% block content %}{% endblock %}{% endspaceless %}</main>
 
-        {% include 'willys_website/includes/footer.html' %}
+        {% if self.nav == False %}
+        {% else %}
+          {% include 'willys_website/includes/footer.html' %}
+        {% endif %}
 
         {% compress js %}
         <script type="text/javascript" src='{% static 'jquery/dist/jquery.min.js' %}'></script>

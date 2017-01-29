@@ -188,6 +188,7 @@ ul{
 /* Btn */
 .btn{
   color: #ffffff;
+  border: none;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover{
@@ -296,13 +297,27 @@ ul{
 }
 
 body > .navbar-collapse{
-  background-color: #2e3234;
+  background-color: #ffffff;
+}
+
+body > .navbar-collapse::after{
+  background-color: #ffffff;
 }
 
 body > .navbar-collapse .nav > li > a{
   margin: 10px;
   text-transform: uppercase;
   font-size: 15px;
+}
+
+body > .navbar-collapse .navbar-nav > li > a, body > .navbar-collapse .navbar-nav > li > a:hover, body > .navbar-collapse .navbar-nav > li > a:focus, body > .navbar-collapse .navbar-nav .active > a, body > .navbar-collapse .navbar-nav .active > a:hover, body > .navbar-collapse .navbar-nav .active > a:focus, body > .navbar-collapse .navbar-nav .open .dropdown-menu > li > a, body > .navbar-collapse .navbar-nav .open .dropdown-menu > li > a:hover, body > .navbar-collapse .navbar-nav .open .dropdown-menu > li > a:focus, body > .navbar-collapse .navbar-nav .navbar-nav .open .dropdown-menu > li > a:active{
+  color: #000000;
+  opacity: 1;
+}
+
+.nav-open .nav .caret{
+  border-bottom-color: #2e3234;
+  border-top-color: #2e3234;
 }
 
 /* Section */
@@ -405,15 +420,9 @@ section.hero.header-filter .container {
 
 /* Simple Hero */
 section.hero.simple-hero {
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center center;
   min-height: 480px;
   max-height: 480px;
   height: 480px;
-  margin: 0;
-  padding: 0;
-  border: 0;
   text-align: left;
 }
 
@@ -444,17 +453,13 @@ section.hero.simple-hero.header-filter::before {
 section.hero.product-hero {
   height: 100vh;
   min-height: 520px;
-  margin: 0;
-  padding: 0;
-  border: 0;
   text-align: left;
 }
 
-section.hero.product-hero:before {
+section.hero.product-hero:after{
   content: '';
   width: 100%;
   height: 660px;
-  z-index: -1000;
   transform-origin: left bottom;
   position: absolute;
   top: 0;
@@ -464,19 +469,86 @@ section.hero.product-hero:before {
   -ms-transform: skew(0deg, -15deg);
   -o-transform: skew(0deg, -15deg);
   transform: skew(0deg, -15deg);
+  background-size: cover;
+  background-position: center center;
+  z-index: 1;
+}
+
+section.hero.product-hero:before {
+  content: '';
+  width: 100%;
+  height: 660px;
+  transform-origin: left bottom;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: skew(0deg, -15deg);
+  -moz-transform: skew(0deg, -15deg);
+  -ms-transform: skew(0deg, -15deg);
+  -o-transform: skew(0deg, -15deg);
+  transform: skew(0deg, -15deg);
+  z-index: 2;
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+  opacity: 0.85;
 }
 
 section.hero.product-hero .container {
   padding-top: 25vh;
   color: #FFFFFF;
+  z-index: 3;
+  position: relative;
+}
+
+section.hero.product-hero .title{
+  margin: 30px 0 0 0;
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Montserrat';
+}
+
+section.hero.product-hero .subtitle {
+  margin: 20px 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: lighter;
+  font-style: italic;
+  text-transform: none;
+  border: none;
+  font-family: 'Open Sans';
+}
+
+
+section.hero.product-hero .features {
+  padding: 0;
+  list-style-type: none;
+  font-size: 16px;
+}
+
+section.hero.product-hero a{
+  text-transform: uppercase;
 }
 
 section.hero.product-hero .image {
-  max-height: 520px;
+  max-height: 480px;
 }
 
 @media (max-width: 767px) {
+  section.hero.product-hero .container {
+    padding-top: 15vh;
+  }
+  section.hero.product-hero .image {
+    max-height: 360px;
+  }
+}
 
+/* Landing hero */
+section.hero.landing-hero {
+  height: 100vh;
+  text-align: center;
+}
+
+section.hero.landing-hero a{
+  text-transform: uppercase;
 }
 
 /* Promo */
@@ -508,9 +580,14 @@ section.full{
 }
 
 section.full .display{
+    transition: opacity 1s ease;
     height: 450px;
     background-size: cover;
     background-position: center center;
+}
+
+section.full .display:hover {
+  opacity: 0.8;
 }
 
 section.full .display .text{
