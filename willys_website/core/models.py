@@ -462,7 +462,14 @@ class ProductPage(Page):
     subpage_types = [] # No Children
 
     name = models.CharField(max_length=255)
-    subtitle = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255, default='notset')
+    bg_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -476,9 +483,9 @@ class ProductPage(Page):
         blank=True,
         validators=[RegexValidator(regex='^#(?:[0-9a-fA-F]{3}){1,2}$')],
         help_text='Background Color Hex #ffffff')
-    style = models.CharField(max_length=255)
-    proof = models.CharField(max_length=255)
-    ibu = models.CharField(max_length=255)
+    style = models.CharField(max_length=255, default='notset')
+    proof = models.CharField(max_length=255, default='notset')
+    ibu = models.CharField(max_length=255, default='notset')
     price = models.CharField(max_length=255)
 
     body = StreamField(GenericStreamBlock())
@@ -488,6 +495,7 @@ class ProductPage(Page):
         hero = [{
             'name': self.name,
             'subtitle': self.subtitle,
+            'bg_image': self.bg_image,
             'image': self.image,
             'color': self.color,
             'style': self.style,
@@ -505,6 +513,7 @@ class ProductPage(Page):
         FieldPanel('name'),
         FieldPanel('subtitle'),
         ImageChooserPanel('image'),
+        ImageChooserPanel('bg_image'),
         FieldPanel('color'),
         FieldPanel('style'),
         FieldPanel('proof'),
