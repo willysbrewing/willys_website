@@ -1,11 +1,22 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+<style>
+    {% if product.color %}
+    section.product-index .product-wrapper .product .display.{{ product.slug }} {
+      background: {{ product.color }};
+      background: -moz-linear-gradient(160deg,  {{ product.color }} 0%, #000000 100%);
+      background: -webkit-linear-gradient(160deg,  {{ product.color }} 0%,#000000 100%);
+      background: linear-gradient(160deg, {{ product.color }} 0%, #000000 100%);
+    }
+    {% endif %}
+</style>
+
 <div class="product-wrapper col-sm-6">
   <a href="{% pageurl product %}">
-    <section class="product">
+    <div class="product">
         <div class="row">
             <div class="col-sm-12">
-              <div class="display" style="background-color: {{ product.color }};">
+              <div class="display material-shadow {{ product.slug }}">
                 <div class="text pull-left">
                   <h3>{{ product.title }}</h3>
                 </div>
@@ -14,6 +25,6 @@
               </div>
             </div>
         </div>
-    </section>
+    </div>
   </a>
 </div>

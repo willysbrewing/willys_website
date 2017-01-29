@@ -1,0 +1,28 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% for heroItem in hero %}
+
+{% image heroItem.background fill-1800x978 as imgbanner %}
+
+<!-- hero -->
+<section class="hero landing-hero header-filter" style="background-image: url({{ imgbanner.url }})">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="title">
+          {{ heroItem.title }}
+        </h1>
+        {% if heroItem.claim %}
+          <h2 class="subtitle">
+            {{ heroItem.claim }}
+          </h2>
+        {% endif %}
+        <a href="#landing" class="btn btn-lg bg-white color-black-2 margin-20 smooth material-shadow">Más información</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- endhero -->
+
+{% endfor %}

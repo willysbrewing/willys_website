@@ -11,25 +11,26 @@
         <span class="icon-bar bar3"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <img class="white-logo" alt="Willy's Brewing" src="{% static 'images/willys_black.png' %}">
+        <img class="white-logo img-responsive" alt="Willy's Brewing" src="{% static 'images/willys_black.png' %}">
       </a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
+        <img class="white-logo img-responsive visible-xs center" style="width:60px;padding:20px 0;" alt="Willy's Brewing" src="{% static 'images/willys_black.png' %}">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Cervezas
               <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/cervezas/american-pale-ale">APA</a></li>
-            <li><a href="/cervezas/indian-pale-ale">IPA</a></li>
+            <li><a href="/cervezas/apa">APA</a></li>
+            <li><a href="/cervezas/ipa">IPA</a></li>
           </ul>
         </li>
+        <li class=""><a href="/eventos">Eventos</a></li>
         <li class=""><a href="/blog">Blog</a></li>
-        <li class=""><a href="/nights">Willy's Nights</a></li>
-        <li><a href="/" class="btn btn-fill btn-block btn-lg bg-black-2 material-shadow">MI CUENTA</a></li>
+        <li><a href="/" class="btn btn-fill btn-lg bg-black-2 color-white material-shadow">MI CUENTA</a></li>
        </ul>
     </div>
   </div>

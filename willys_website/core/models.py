@@ -52,13 +52,10 @@ class HTMLAlignmentChoiceBlock(FieldBlock):
 
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
-    caption = RichTextBlock()
-    alignment = ImageFormatChoiceBlock()
 
 
 class AlignedHTMLBlock(StructBlock):
     html = RawHTMLBlock()
-    alignment = HTMLAlignmentChoiceBlock()
 
     class Meta:
         icon = 'code'
@@ -69,11 +66,10 @@ class GenericStreamBlock(StreamBlock):
     h3 = CharBlock(icon='title', classname='title')
     h4 = CharBlock(icon='title', classname='title')
     intro = RichTextBlock(icon='pilcrow')
-    paragraph = RichTextBlock(icon='pilcrow')
-    aligned_image = ImageBlock(label='Aligned image', icon='image')
     pullquote = PullQuoteBlock()
-    aligned_html = AlignedHTMLBlock(icon='code', label='Raw HTML')
-    document = DocumentChooserBlock(icon='doc-full-inverse')
+    paragraph = RichTextBlock(icon='pilcrow')
+    image = ImageBlock(icon='image', label='image')
+    html = AlignedHTMLBlock(icon='code', label='html')
 
 ##################################################################
 ########### Abstract classes #####################################
@@ -100,17 +96,17 @@ class LinkFields(models.Model):
     def link(self):
         if self.link_page:
             return self.link_page.url
-        elif self.link_document:
-            return self.link_document.url
-        else:
+        elif self.link_external:
             return self.link_external
+        else:
+            return '/'
 
     panels = [
-        FieldPanel('link_external'),
         PageChooserPanel('link_page'),
-        DocumentChooserPanel('link_document'),
+        FieldPanel('link_external'),
     ]
 
+    # DocumentChooserPanel('link_document'),
     class Meta:
         abstract = True
 
@@ -142,9 +138,9 @@ class ContactFields(models.Model):
 ##################################################################
 
 class HeroItem(LinkFields):
+
     title = models.CharField(max_length=255)
     claim = models.CharField(max_length=255)
-    position = models.CharField(max_length=5, default=('left', 'Left'), choices=(('left', 'Left'), ('right', 'Right')))
     background = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -156,7 +152,6 @@ class HeroItem(LinkFields):
     panels = [
         FieldPanel('title'),
         FieldPanel('claim'),
-        FieldPanel('position'),
         ImageChooserPanel('background'),
         MultiFieldPanel(LinkFields.panels, 'Link'),
     ]
@@ -256,6 +251,7 @@ class BlogIndexPageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.BlogIndexPage', related_name='hero')
 
 class BlogIndexPage(Page):
+    parent_page_types = ['willys_website.HomePage']
     subpage_types = ['willys_website.BlogPage'] # Children can only be BlogPage
 
     @property
@@ -357,6 +353,7 @@ class EventIndexPageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.EventIndexPage', related_name='hero')
 
 class EventIndexPage(Page):
+    parent_page_types = ['willys_website.HomePage']
     subpage_types = ['willys_website.EventPage'] # Children can only be EventPage
 
     @property
@@ -435,6 +432,7 @@ class ProductIndexPageHero(Orderable, HeroItem):
     page = ParentalKey('willys_website.ProductIndexPage', related_name='hero')
 
 class ProductIndexPage(Page):
+    parent_page_types = ['willys_website.HomePage']
     subpage_types = ['willys_website.ProductPage'] # Children can only be ProductPage
 
     @property
@@ -463,7 +461,8 @@ class ProductPage(Page):
     parent_page_types = ['willys_website.ProductIndexPage'] # Parent can only be a ProductIndex
     subpage_types = [] # No Children
 
-    name = models.CharField(max_length=255, default=False)
+    name = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -477,12 +476,25 @@ class ProductPage(Page):
         blank=True,
         validators=[RegexValidator(regex='^#(?:[0-9a-fA-F]{3}){1,2}$')],
         help_text='Background Color Hex #ffffff')
-    cost = models.CharField(max_length=255)
+    style = models.CharField(max_length=255)
+    proof = models.CharField(max_length=255)
+    ibu = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+
     body = StreamField(GenericStreamBlock())
 
     @property
     def new_hero(self):
-        hero = [{'name': self.name, 'image': self.image, 'color': self.color}]
+        hero = [{
+            'name': self.name,
+            'subtitle': self.subtitle,
+            'image': self.image,
+            'color': self.color,
+            'style': self.style,
+            'proof': self.proof,
+            'ibu': self.ibu,
+            'price': self.price
+            }]
         return hero
 
     @property
@@ -491,11 +503,38 @@ class ProductPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('name'),
+        FieldPanel('subtitle'),
         ImageChooserPanel('image'),
         FieldPanel('color'),
-        FieldPanel('cost'),
+        FieldPanel('style'),
+        FieldPanel('proof'),
+        FieldPanel('ibu'),
+        FieldPanel('price'),
         StreamFieldPanel('body'),
         InlinePanel('related_links', label='Related links'),
+    ]
+
+    promote_panels = Page.promote_panels
+
+##################################################################
+################# Landing Page ###################################
+##################################################################
+
+class LandingPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.LandingPage', related_name='hero')
+
+
+class LandingPage(Page):
+    parent_page_types = ['willys_website.HomePage']
+    subpage_types = [] # No Children
+
+    nav = False
+
+    body = StreamField(GenericStreamBlock())
+
+    content_panels = Page.content_panels + [
+        InlinePanel('hero', label='Hero'),
+        StreamFieldPanel('body'),
     ]
 
     promote_panels = Page.promote_panels

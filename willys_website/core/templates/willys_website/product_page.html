@@ -6,7 +6,7 @@
     {% include "willys_website/includes/product_hero.html" with hero=self.new_hero only %}
 
     <!-- product -->
-    <section class="product">
+    <section id="product" class="product">
 
       <div class="container">
 
@@ -22,6 +22,6 @@
     </section>
     <!-- endproduct -->
 
-    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+    <!--{% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}-->
 
 {% endblock %}

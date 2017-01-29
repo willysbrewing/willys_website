@@ -22,6 +22,21 @@
         <h1 class="title">
           {{ heroItem.name }}
         </h1>
+        <h2 class="subtitle">
+          {{ heroItem.subtitle }}
+        </h2>
+        <ul class="features">
+            <li>
+                Estilo: <b>{{ heroItem.style }}</b>
+            </li>
+            <li>
+                Graduación: <b>{{ heroItem.proof }}</b>
+            </li>
+            <li>
+               IBU: <b>{{ heroItem.ibu }}</b>
+            </li>
+        </ul>
+        <a href="#product" class="btn btn-lg bg-white color-black-2 margin-20 material-shadow smooth hidden-xs">Así la hacemos</a>
       </div>
       <div class="col-sm-6">
         {% image heroItem.image width-800 as image %}

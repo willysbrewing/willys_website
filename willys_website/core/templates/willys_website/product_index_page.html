@@ -11,17 +11,19 @@
       <div class="container">
         {% with self.products.all as products %}
           {% if products %}
+          <div class="row">
             {% for product in products %}
                 {% include "willys_website/includes/product_list_item.html" %}
             {% empty %}
-                No Events found
+                No Products found
             {% endfor %}
+          </div>
           {% endif %}
         {% endwith %}
       </div>
     </section>
     <!-- endeventindex -->
 
-    {% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}
+    <!--{% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}-->
 
 {% endblock %}

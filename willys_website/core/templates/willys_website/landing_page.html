@@ -1,0 +1,26 @@
+{% extends "willys_website/base.html" %}
+
+{% load willys_website_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+
+    {% include "willys_website/includes/landing_hero.html" with hero=self.hero.all only %}
+
+    <!-- landing -->
+    <section id="landing" class="landing">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-12">
+            {% if self.body %}
+              {% include "willys_website/includes/streamfield.html" with content=self.body %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}
