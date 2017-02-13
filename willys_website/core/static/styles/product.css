@@ -30,6 +30,8 @@ section.product-index .product-wrapper .product .display .text{
 
 section.product-index .product-wrapper .product .display .text h3{
   margin: 0;
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
 }
 
 section.product-index .product-wrapper .product .display img{

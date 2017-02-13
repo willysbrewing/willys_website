@@ -73,7 +73,7 @@ ul{
 
 /* Brand */
 .font-brand{
-    font-family: 'Montserrat';
+    font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
@@ -189,6 +189,7 @@ ul{
 .btn{
   color: #ffffff;
   border: none;
+  font-family: 'Roboto Condensed';
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover{
@@ -249,6 +250,10 @@ ul{
   font-size: 20px;
   line-height: 50px;
   text-align: center;
+}
+
+.navbar{
+  font-family: 'Roboto Condensed';
 }
 
 .navbar .navbar-brand{
@@ -356,6 +361,7 @@ section.hero .title{
   color: #FFFFFF;
   font-size: 30px;
   text-transform: uppercase;
+  font-family: 'Roboto Condensed';
 }
 
 section.hero .subtitle {
@@ -365,7 +371,7 @@ section.hero .subtitle {
   text-transform: uppercase;
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
-  font-family: 'Montserrat';
+  font-family: 'Roboto', sans-serif;
 }
 
 section.hero.header-filter {
@@ -384,7 +390,7 @@ section.hero.header-filter:before, section.hero .header-filter:after {
 }
 
 section.hero.header-filter::before {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   transition: 5s ease;
 }
 
@@ -420,14 +426,14 @@ section.hero.header-filter .container {
 
 /* Simple Hero */
 section.hero.simple-hero {
-  min-height: 480px;
-  max-height: 480px;
-  height: 480px;
-  text-align: left;
+  min-height: 280px;
+  max-height: 280px;
+  height: 280px;
+  text-align: center;
 }
 
 section.hero.simple-hero .container{
-  padding-top: 25vh;
+  padding-top: 20vh;
 }
 
 section.hero.simple-hero .title{
@@ -439,7 +445,7 @@ section.hero.simple-hero .subtitle {
 }
 
 section.hero.simple-hero.header-filter::before {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: 5s ease;
 }
 
@@ -453,6 +459,7 @@ section.hero.simple-hero.header-filter::before {
 section.hero.product-hero {
   height: 100vh;
   min-height: 520px;
+  max-height: 520px;
   text-align: left;
 }
 
@@ -503,7 +510,7 @@ section.hero.product-hero .title{
   margin: 30px 0 0 0;
   font-size: 40px;
   font-weight: 700;
-  font-family: 'Montserrat';
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 section.hero.product-hero .subtitle {
@@ -511,10 +518,8 @@ section.hero.product-hero .subtitle {
   padding: 0;
   font-size: 22px;
   font-weight: lighter;
-  font-style: italic;
-  text-transform: none;
   border: none;
-  font-family: 'Open Sans';
+  font-family: 'Roboto', sans-serif;
 }
 
 
@@ -522,6 +527,7 @@ section.hero.product-hero .features {
   padding: 0;
   list-style-type: none;
   font-size: 16px;
+  font-family: 'Roboto', sans-serif;
 }
 
 section.hero.product-hero a{
@@ -554,7 +560,7 @@ section.hero.landing-hero a{
 /* Promo */
 section.promo{
   padding: 40px 0;
-  font-family: 'Montserrat';
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1.5px;
 }
 
@@ -624,6 +630,12 @@ footer.footer {
 .footer .title{
   color: #fff;
   font-weight: 600;
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
+}
+
+.footer nav > ul a.btn{
+  font-family: 'Open Sans', sans-serif;
 }
 
 .footer nav > ul a:not(.btn){
@@ -636,6 +648,8 @@ footer.footer {
 
 .footer .copyright{
   color: #ffffff;
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
 }
 
 /* Streamfield */

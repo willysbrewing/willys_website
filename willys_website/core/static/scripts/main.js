@@ -102,6 +102,17 @@
             }
         }
 
+        // init smooth links
+        $('a.smooth').click(function(e) {
+            e.preventDefault();
+            var $link = $(this);
+            var anchor = $link.attr('href');
+            $('html, body').stop().animate({
+                scrollTop : $(anchor).offset().top
+            }, 500);
+            return false;
+        });
+
         var window_width = $(window).width();
         var burger_menu = $('nav[role="navigation"]').hasClass('navbar-burger') ? true : false;
         // Init navigation toggle for small screens
@@ -112,16 +123,6 @@
         // Do not delay load of page with async functionality: Wait for window load
         window.addEventListener('load', function(){
 
-            // init smooth links
-            $('a.smooth').click(function(e) {
-                e.preventDefault();
-                var $link = $(this);
-                var anchor = $link.attr('href');
-                $('html, body').stop().animate({
-                    scrollTop : $(anchor).offset().top
-                }, 500);
-                return false;
-            });
 
         }); // End of window load
 
