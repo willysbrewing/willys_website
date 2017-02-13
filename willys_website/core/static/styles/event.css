@@ -27,10 +27,17 @@ section.event-index .event-wrapper .event .display .text{
   color: #000;
   width: 420px;
   padding: 40px;
+  border-radius: 5px;
 }
 
 section.event-index .event-wrapper .event .display .text h3{
   margin: 0;
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
+}
+
+section.event-index .event-wrapper .event .display .text p{
+  font-family: 'Roboto';
 }
 
 @media (max-width: 767px) {
@@ -51,4 +58,8 @@ section.event-index .event-wrapper .event .display .text h3{
 /* Event */
 section.event{
 
+}
+
+section.event h2{
+  font-family: 'Roboto Condensed';
 }
