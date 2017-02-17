@@ -6,7 +6,8 @@
 
 {% block content %}
 
-    {% include 'willys_website/includes/hero.html' with hero=self.hero.all only %}
+
+    {% include 'willys_website/includes/hero_video.html' with hero=self.hero.all video=self.video only %}
 
     {% include 'willys_website/includes/home_promo.html' with promo=self.promo.all only %}
 
