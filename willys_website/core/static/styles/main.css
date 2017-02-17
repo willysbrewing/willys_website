@@ -557,6 +557,30 @@ section.hero.landing-hero a{
   text-transform: uppercase;
 }
 
+/* Video Hero */
+
+section.hero.hero-video{
+  position: relative;
+  height: 520px;
+  min-height: 520px;
+}
+
+
+section.hero.hero-video video {
+  object-fit: fill;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+section.hero.hero-video.header-filter::before {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 5s ease;
+  z-index: 2;
+}
+
 /* Promo */
 section.promo{
   padding: 40px 0;

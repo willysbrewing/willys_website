@@ -14,6 +14,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiF
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtailmedia.edit_handlers import MediaChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailsearch import index
@@ -213,7 +214,16 @@ class HomePageFeatured(Orderable, LinkFields):
 
 class HomePage(Page):
 
+    video = models.ForeignKey(
+        'wagtailmedia.Media',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     #parent_page_types = [] # Nothing can have a homepage as a child
+
 
     class Meta:
         verbose_name = 'Homepage'
@@ -222,6 +232,7 @@ class HomePage(Page):
         InlinePanel('hero', label='Hero'),
         InlinePanel('promo', label='Promo'),
         InlinePanel('featured', label='Featured'),
+        MediaChooserPanel('video'),
     ]
 
     promote_panels = Page.promote_panels

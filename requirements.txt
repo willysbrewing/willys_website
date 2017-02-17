@@ -9,7 +9,6 @@ django-redis==4.6.0
 django-taggit==0.18.3
 django-treebeard==4.1.0
 djangorestframework==3.5.3
-gunicorn==19.6.0
 html5lib==0.999999999
 meld3==1.0.2
 Pillow==3.4.2
@@ -19,11 +18,9 @@ pytz==2016.10
 rcssmin==1.0.6
 redis==2.10.5
 requests==2.12.4
-rjsmin==1.0.12
 six==1.10.0
 Unidecode==0.4.19
-uWSGI==2.0.14
-virtualenv==15.1.0
-wagtail==1.8
+wagtail==1.9
+wagtailmedia==0.1.3
 webencodings==0.5
 Willow==0.4

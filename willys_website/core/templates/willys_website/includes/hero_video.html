@@ -1,0 +1,82 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% for heroItem in hero %}
+{% image heroItem.background fill-1800x978 as imgbanner %}
+
+
+{% if video and video.type == 'video' %}
+
+  <!-- hero -->
+  <section class="hero header-filter visible-sm visible-xs" style="background-image: url({{ imgbanner.url }})">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="boost">
+            <h1 class="title">
+              {{ heroItem.title }}
+            </h1>
+            <h2 class="subtitle">
+              {{ heroItem.claim }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- endhero -->
+
+  <!-- hero -->
+  <section class="hero hero-video header-filter hidden-sm hidden-xs" style="background-image: url({{ video.thumbnail.url }})">
+    <div class="wrapper">
+      <div class="container" style="position:relative;z-index:3;">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="boost">
+              <h1 class="title">
+                {{ heroItem.title }}
+              </h1>
+              <h2 class="subtitle">
+                {{ heroItem.claim }}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <video autoplay="true" loop muted style="z-index:1;" class="supervideo" poster="{{ video.thumbnail.url }}">
+        <source src="{{ video.url }}" type="video/mp4">
+        <!--<source src="https://static-videos.pexels.com/assets/pexels-videos-c81eb555cfb637a40f86f2e0a4f5fb82d2e75b5d69456b9c67598d365d125014.webm" type="video/ogg">-->
+        Your browser does not support the HTML5 video tag. Please upgrade it.
+      </video>
+    </div>
+  </section>
+  <!-- endhero -->
+
+{% else %}
+
+  <!-- hero -->
+  <section class="hero header-filter" style="background-image: url({{ imgbanner.url }})">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="boost">
+            <h1 class="title">
+              {{ heroItem.title }}
+            </h1>
+            <h2 class="subtitle">
+              {{ heroItem.claim }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- endhero -->
+
+{% endif %}
+
+
+{% endfor %}

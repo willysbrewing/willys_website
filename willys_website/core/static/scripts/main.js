@@ -113,6 +113,11 @@
             return false;
         });
 
+        //Index video autoplay at load
+        if($('.supervideo').get(0) !== undefined){
+          $('.supervideo').get(0).play();
+        }
+
         var window_width = $(window).width();
         var burger_menu = $('nav[role="navigation"]').hasClass('navbar-burger') ? true : false;
         // Init navigation toggle for small screens
