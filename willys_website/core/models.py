@@ -253,6 +253,10 @@ class StandardPage(Page):
 
     body = StreamField(GenericStreamBlock())
 
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
+
     content_panels = Page.content_panels + [
         InlinePanel('hero', label='Hero'),
         StreamFieldPanel('body'),
@@ -279,6 +283,10 @@ class BlogIndexPage(Page):
         # Order by most recent date first
         blog_posts = blog_posts.order_by('-date')
         return blog_posts
+
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
 
     def get_context(self, request):
         # Get blogs
@@ -341,6 +349,10 @@ class BlogPage(Page):
         return hero
 
     @property
+    def feed_image(self):
+        return self.hero[0].get('background')
+
+    @property
     def blog_index(self):
        # Find blog index in ancestors
        for ancestor in reversed(self.get_ancestors()):
@@ -387,6 +399,10 @@ class EventIndexPage(Page):
 
         return events
 
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
+
     content_panels = Page.content_panels + [
         InlinePanel('hero', label='Hero'),
     ]
@@ -424,6 +440,10 @@ class EventPage(Page):
         return hero
 
     @property
+    def feed_image(self):
+        return self.hero[0].get('background')        
+
+    @property
     def event_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
@@ -457,6 +477,10 @@ class ProductIndexPage(Page):
         # Get list of live event pages that are descendants of this page
         products = ProductPage.objects.live().descendant_of(self)
         return products
+
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
 
     content_panels = Page.content_panels + [
         InlinePanel('hero', label='Hero'),
@@ -526,6 +550,10 @@ class ProductPage(Page):
     def product_index(self):
         return self.get_ancestors().type(ProductIndexPage).last()
 
+    @property
+    def feed_image(self):
+        return self.bg_image
+
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('subtitle'),
@@ -557,6 +585,10 @@ class LandingPage(Page):
     nav = False
 
     body = StreamField(GenericStreamBlock())
+
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
 
     content_panels = Page.content_panels + [
         InlinePanel('hero', label='Hero'),
