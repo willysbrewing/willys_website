@@ -21,7 +21,10 @@ else:
     urlpatterns = [
         url(r'^django-admin/', include(admin.site.urls)),
         url(r'^admin/', include(wagtailadmin_urls)),
+        url(r'^test404/$', TemplateView.as_view(template_name='404.html')),
+        url(r'^test500/$', TemplateView.as_view(template_name='500.html')),
     ]
+
 
 urlpatterns += [
     url(r'^documents/', include(wagtaildocs_urls)),
