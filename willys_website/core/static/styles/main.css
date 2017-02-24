@@ -105,6 +105,7 @@ ul{
     color: #fff;
     font-size: 12px;
     text-align: center;
+    background-color: #212121;
 }
 .cookies .close{
     position: absolute;
@@ -714,4 +715,30 @@ footer.footer {
   width: 100%;
   height: auto;
   margin: 20px auto;
+}
+
+/** MODAL **/
+
+#ageModal {
+  background-color: rgba(0,0,0,0.5);
+}
+
+#ageModal .modal-dialog{
+  padding-top: 120px;
+}
+
+#ageModal .modal-content{
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Roboto Condensed';
+  text-align: center;
+  border-radius: 0;
+  min-height: 200px;
+  padding-top: 20px;
+}
+
+#ageModal .modal-content h4{
+  font-family: 'Roboto Condensed';
+  text-transform: uppercase;
+  font-size: 30px;
 }
