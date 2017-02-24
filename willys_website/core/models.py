@@ -213,6 +213,7 @@ class HomePageFeatured(Orderable, LinkFields):
     ]
 
 class HomePage(Page):
+    #parent_page_types = [] # Nothing can have a homepage as a child
 
     video = models.ForeignKey(
         'wagtailmedia.Media',
@@ -222,8 +223,9 @@ class HomePage(Page):
         related_name='+'
     )
 
-    #parent_page_types = [] # Nothing can have a homepage as a child
-
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
 
     class Meta:
         verbose_name = 'Homepage'
@@ -239,20 +241,24 @@ class HomePage(Page):
 
 
 ##################################################################
-################# Standard Page @TODO ############################
+################# Standard Page ##################################
 ##################################################################
 
-# class StandardPageHeroItem(Orderable, HeroItem):
-#     page = ParentalKey('willys_website.StandardPage', related_name='hero')
-#
-# class StandardPage(Page):
-#     content_panels = Page.content_panels + [
-#         InlinePanel('hero', label='Hero'),
-#     ]
-#
-#     promote_panels = Page.promote_panels + [
-#         ImageChooserPanel('feed_image'),
-#     ]
+class StandardPageHeroItem(Orderable, HeroItem):
+    page = ParentalKey('willys_website.StandardPage', related_name='hero')
+
+class StandardPage(Page):
+    parent_page_types = ['willys_website.HomePage']
+    subpage_types = [] # No Children
+
+    body = StreamField(GenericStreamBlock())
+
+    content_panels = Page.content_panels + [
+        InlinePanel('hero', label='Hero'),
+        StreamFieldPanel('body'),
+    ]
+
+    promote_panels = Page.promote_panels
 
 ##################################################################
 ################# Blog Index Page ################################

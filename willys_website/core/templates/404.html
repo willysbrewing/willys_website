@@ -1,9 +1,43 @@
-{% extends "base.html" %}
+{% extends "willys_website/base.html" %}
 
 {% block body_class %}template-404{% endblock %}
 
 {% block content %}
-    <h1>Page not found</h1>
+<style>
+    section.hero {
+      text-align: left;
+    }
+    section.hero .container{
+      padding-top: 20vh;
+    }
+    section.hero .title{
+      font-size: 50px;
+      color: black;
+    }
+    section.hero .subtitle{
+      border: none;
+      font-size: 20px;
+      text-transform: none;
+      font-family: 'Open Sans';
+      color: black;
+    }
+</style>
+<!-- hero -->
+<section class="hero color-black">
 
-    <h2>Sorry, this page could not be found.</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="title">
+          OMG ¡te has cargado la web!
+        </h1>
+        <h2 class="subtitle">
+          No te ralles, seguramente has seguido un link antiguo... <i>o igual las has liado</i>...
+        </h2>
+        <a href="/" class="btn btn-lg bg-black color-white margin-20 material-shadow">IR A WILLY'S</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- endhero -->
 {% endblock %}

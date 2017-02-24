@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    {% include "willys_website/includes/landing_hero.html" with hero=self.hero.all only %}
+    {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
 
     <!-- landing -->
     <section id="landing" class="landing">
@@ -22,7 +22,5 @@
 
       </div>
     </section>
-
-    {% include 'willys_website/includes/footer.html' %}
 
 {% endblock %}

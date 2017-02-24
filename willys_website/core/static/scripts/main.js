@@ -3,6 +3,20 @@
 
     $(function(){
 
+        /************ SW *************/
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/static/scripts/sw.js').then(function(registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        }
+
         /************ COOKIES *************/
 
         function getCookie(cname) {
@@ -20,21 +34,39 @@
             var d = new Date();
             d.setTime(d.getTime() + (exdays*24*60*60*1000));
             var expires = 'expires='+d.toUTCString();
-            document.cookie = cname + '=' + cvalue + '; ' + expires;
+            document.cookie = cname + '=' + cvalue + '; ' + expires+"; path=/";
         }
 
-        // (function(){
-        //   function showPolicy(){
-        //     $('.cookies').show();
-        //   }
-        //   if(parseInt(getCookie('wb_p')) !== 1){
-        //     showPolicy();
-        //     setCookie('wb_p', 1, 365);
-        //     $('.cookies .close').click(function() {
-        //       $('.cookies').fadeOut();
-        //     })
-        //   }
-        // })();
+        (function(){
+          function showPolicy(){
+            $('.cookies').show();
+          }
+          function showAgeModal(){
+            var ageModal = $('#ageModal');
+            ageModal.modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+            ageModal.find('#nop').on('click', function(){
+              ageModal.find('.modal-body').html('<p style="font-size:15px;">Demasiado peque para entrar... vuelve en unos años, te guardaremos una birra 😎</p>');
+            });
+            ageModal.find('#yep').on('click', function(){
+              setCookie('wb_a', 1, 365);
+              ageModal.modal('hide');
+            });
+            ageModal.modal('show');
+          }
+          if(parseInt(getCookie('wb_p')) !== 1){
+            showPolicy();
+            setCookie('wb_p', 1, 365);
+            $('.cookies .close').click(function() {
+              $('.cookies').fadeOut();
+            })
+          }
+          if(parseInt(getCookie('wb_a')) !== 1){
+            showAgeModal();
+          }
+        })();
 
         /************ NAVBAR *************/
 
