@@ -30,7 +30,8 @@ section.product-index .product-wrapper .product .display .text{
 
 section.product-index .product-wrapper .product .display .text h3{
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Special Elite', cursive;
+  font-weight: bolder;
   text-transform: uppercase;
 }
 
