@@ -73,9 +73,9 @@ ul{
 
 /* Brand */
 .font-brand{
-    font-family: 'Barrio', cursive;
+    font-family: 'Special Elite', cursive;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: bolder;
     letter-spacing: 2px;
 }
 
@@ -190,7 +190,7 @@ ul{
 .btn{
   color: #ffffff;
   border: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover{
@@ -203,7 +203,7 @@ ul{
 
 /* CTA */
 .cta{
-  font: 300 18px 'Montserrat', sans-serif;
+  font: 300 18px 'Chau Philomene One', sans-serif;
   margin: 40px 0 0 0;
 }
 
@@ -254,7 +254,11 @@ ul{
 }
 
 .navbar{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
+}
+
+.navbar-nav{
+  font-family: 'Chau Philomene One', sans-serif;
 }
 
 .navbar .navbar-brand{
@@ -362,7 +366,7 @@ section.hero .title{
   color: #FFFFFF;
   font-size: 30px;
   text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
 }
 
 section.hero .subtitle {
@@ -372,7 +376,8 @@ section.hero .subtitle {
   text-transform: uppercase;
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
-  font-family: 'Barrio', cursive;
+  font-family: 'Special Elite', cursive;
+  font-weight: bolder;
 }
 
 section.hero.header-filter {
@@ -454,6 +459,9 @@ section.hero.simple-hero.header-filter::before {
   section.hero.simple-hero .container {
     padding-top: 20vh;
   }
+  section.hero.simple-hero .title{
+    margin: 0;
+  }
 }
 
 /* Product Hero */
@@ -510,17 +518,16 @@ section.hero.product-hero .container {
 section.hero.product-hero .title{
   margin: 30px 0 0 0;
   font-size: 66px;
-  font-weight: 700;
-  font-family: 'Barrio', cursive;
+  font-family: 'Special Elite', cursive;
+  font-weight: bolder;
 }
 
 section.hero.product-hero .subtitle {
   margin: 20px 0;
   padding: 0;
   font-size: 22px;
-  font-weight: lighter;
   border: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
 }
 
 
@@ -543,8 +550,11 @@ section.hero.product-hero .image {
   section.hero.product-hero .container {
     padding-top: 15vh;
   }
+  section.hero.product-hero .title{
+    font-size: 50px;
+  }
   section.hero.product-hero .image {
-    max-height: 360px;
+    max-height: 320px;
   }
 }
 
@@ -585,7 +595,8 @@ section.hero.hero-video.header-filter::before {
 /* Promo */
 section.promo{
   padding: 40px 0;
-  font-family: 'Barrio', cursive;
+  font-family: 'Special Elite', cursive;
+  font-weight: bolder;
   letter-spacing: 1.5px;
 }
 
@@ -654,8 +665,7 @@ footer.footer {
 
 .footer .title{
   color: #fff;
-  font-weight: 600;
-  font-family: 'Barrio', cursive;
+  font-family: 'Chau Philomene One', sans-serif;
   text-transform: uppercase;
 }
 
@@ -673,7 +683,7 @@ footer.footer {
 
 .footer .copyright{
   color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
   text-transform: uppercase;
 }
 
@@ -730,7 +740,7 @@ footer.footer {
 #ageModal .modal-content{
   background-color: #ffffff;
   color: #000000;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
   text-align: center;
   border-radius: 0;
   min-height: 200px;
@@ -738,7 +748,7 @@ footer.footer {
 }
 
 #ageModal .modal-content h4{
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chau Philomene One', sans-serif;
   text-transform: uppercase;
   font-size: 30px;
 }
