@@ -32,12 +32,12 @@ section.event-index .event-wrapper .event .display .text{
 
 section.event-index .event-wrapper .event .display .text h3{
   margin: 0;
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 
 section.event-index .event-wrapper .event .display .text p{
-  font-family: 'Roboto';
+  font-family: 'Montserrat', sans-serif;
 }
 
 @media (max-width: 767px) {
@@ -61,5 +61,5 @@ section.event{
 }
 
 section.event h2{
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
 }

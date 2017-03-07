@@ -7,11 +7,11 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4{
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container{
@@ -73,7 +73,7 @@ ul{
 
 /* Brand */
 .font-brand{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Barrio', cursive;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
@@ -133,7 +133,7 @@ ul{
 }
 
 .arrow {
-  position: relative;;
+  position: relative;
   bottom: 0;
   width: 100%;
   padding-bottom:3%;
@@ -190,7 +190,7 @@ ul{
 .btn{
   color: #ffffff;
   border: none;
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover{
@@ -203,7 +203,7 @@ ul{
 
 /* CTA */
 .cta{
-  font: 300 18px Open-Sans,sans-serif;
+  font: 300 18px 'Montserrat', sans-serif;
   margin: 40px 0 0 0;
 }
 
@@ -254,14 +254,14 @@ ul{
 }
 
 .navbar{
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar .navbar-brand{
   padding: 0;
   height: auto;
   height: 50px;
-  padding: 10px 15px;
+  padding: 3px 15px;
   margin-bottom: 0;
 }
 
@@ -341,7 +341,7 @@ section.hero {
   margin: 0;
   padding: 0;
   border: 0;
-  text-align: center;;
+  text-align: center;
 }
 
 section.hero .container {
@@ -362,7 +362,7 @@ section.hero .title{
   color: #FFFFFF;
   font-size: 30px;
   text-transform: uppercase;
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
 }
 
 section.hero .subtitle {
@@ -372,7 +372,7 @@ section.hero .subtitle {
   text-transform: uppercase;
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Barrio', cursive;
 }
 
 section.hero.header-filter {
@@ -509,9 +509,9 @@ section.hero.product-hero .container {
 
 section.hero.product-hero .title{
   margin: 30px 0 0 0;
-  font-size: 40px;
+  font-size: 66px;
   font-weight: 700;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Barrio', cursive;
 }
 
 section.hero.product-hero .subtitle {
@@ -520,7 +520,7 @@ section.hero.product-hero .subtitle {
   font-size: 22px;
   font-weight: lighter;
   border: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -528,7 +528,7 @@ section.hero.product-hero .features {
   padding: 0;
   list-style-type: none;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 section.hero.product-hero a{
@@ -585,7 +585,7 @@ section.hero.hero-video.header-filter::before {
 /* Promo */
 section.promo{
   padding: 40px 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Barrio', cursive;
   letter-spacing: 1.5px;
 }
 
@@ -655,12 +655,12 @@ footer.footer {
 .footer .title{
   color: #fff;
   font-weight: 600;
-  font-family: 'Roboto Condensed';
+  font-family: 'Barrio', cursive;
   text-transform: uppercase;
 }
 
 .footer nav > ul a.btn{
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footer nav > ul a:not(.btn){
@@ -673,7 +673,7 @@ footer.footer {
 
 .footer .copyright{
   color: #ffffff;
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 
@@ -730,7 +730,7 @@ footer.footer {
 #ageModal .modal-content{
   background-color: #ffffff;
   color: #000000;
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
   border-radius: 0;
   min-height: 200px;
@@ -738,7 +738,7 @@ footer.footer {
 }
 
 #ageModal .modal-content h4{
-  font-family: 'Roboto Condensed';
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   font-size: 30px;
 }
