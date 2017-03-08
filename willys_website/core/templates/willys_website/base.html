@@ -22,7 +22,6 @@
         <link rel="icon" type="image/png" href="{% static 'icons/favicon-16x16.png' %}" sizes="16x16">
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-icon.png' %}">
         <link rel="icon" type="image/png" sizes="192x192" href="{% static 'icons/android-icon-192x192.png' %}">
-        <link rel="icon" type="image/png" sizes="384x384" href="{% static 'icons/android-icon-384x384.png' %}">
         <meta name="msapplication-TileColor" content="#9E9E9E">
         <meta name="msapplication-TileImage" content="{% static 'icon/android-icon-192x192.png' %}">
         <meta name="theme-color" content="#9E9E9E">
@@ -32,13 +31,13 @@
         <meta name="twitter:creator" content="@willysbrewing"><!--@TODO-->
         <meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Willy's">
         <meta name="twitter:description" content="{% if self.intro %}{{ self.intro|striptags }}{% elif self.search_description %}{{ self.search_description }}{% endif %}">
-        <meta name="twitter:image:src" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static 'images/willys.png' %}{% endif %}" />
+        <meta name="twitter:image:src" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static 'images/willys-content.png' %}{% endif %}" />
 
         <meta property="fb:app_id" content="" /><!--@TODO-->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://{{ request.site.hostname }}{{ self.url }}" />
         <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Willy's" />
-        <meta property="og:image" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-1024 as img %}{{ img.url }}{% else %}{% static 'images/willys.png' %}{% endif %}" />
+        <meta property="og:image" content="http://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-1024 as img %}{{ img.url }}{% else %}{% static 'images/willys-content.png' %}{% endif %}" />
         <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta property="og:site_name" content="willysbrewing" /><!--@TODO-->
 

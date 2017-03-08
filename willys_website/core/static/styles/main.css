@@ -372,7 +372,7 @@ section.hero .title{
 section.hero .subtitle {
   color: #FFFFFF;
   padding: 20px 0;
-  font-size: 50px;
+  font-size: 70px;
   text-transform: uppercase;
   border-top: 3px solid #fff;
   border-bottom: 3px solid #fff;
@@ -461,6 +461,7 @@ section.hero.simple-hero.header-filter::before {
   }
   section.hero.simple-hero .title{
     margin: 0;
+    font-size: 36px;
   }
 }
 
