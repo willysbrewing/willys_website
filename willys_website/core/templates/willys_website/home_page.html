@@ -9,6 +9,25 @@
 
     {% include 'willys_website/includes/hero_video.html' with hero=self.hero.all video=self.video only %}
 
+    <section class="subscribe-line">
+       <div class="container">
+          <div class="row">
+               <div class="col-md-8">
+                  <form class="">
+                       <div class="form-group">
+                            <input type="text" value="" class="form-control" placeholder="Introduce tu mail para recibir Willy's Updates ">
+                       </div>
+                   </form>
+               </div>
+               <div class="col-md-4">
+                 <div class="center">
+                   <a href="/" class="cta btn-fill btn-lg bg-black-2 color-white material-shadow">QUIERO SER DE WILLY'S</a>
+                 </div>
+               </div>
+          </div>
+       </div>
+    </section>
+
     {% include 'willys_website/includes/home_promo.html' with promo=self.promo.all only %}
 
     {% include 'willys_website/includes/home_featured.html' with featured=self.featured.all only %}
