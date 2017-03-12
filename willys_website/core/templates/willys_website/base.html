@@ -14,7 +14,7 @@
         {% if self.canonical_url %}
             <link rel="canonical" href="{{ self.canonical_url }}" />
         {% endif %}
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %} | Willy's{% endblock %}</title>
+        <title>{% block title %}Willy's | {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_postfix %}{% endblock %}</title>
 
         <link rel="manifest" href="{% static 'manifest.json' %}">
         <link rel="icon" href="{% static 'favicon.ico' %}">

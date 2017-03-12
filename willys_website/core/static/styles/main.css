@@ -71,6 +71,10 @@ ul{
   .margin-20-last{margin:0;}
 }
 
+.btn-lg{
+  padding: 8px 16px;
+}
+
 /* Brand */
 .font-brand{
     font-family: 'Cabin Sketch', cursive;
@@ -652,6 +656,23 @@ section.full .display .text h3{
   }
 }
 
+/* Subscribe line */
+section.subscribe-line{
+
+}
+
+section.subscribe-line h3{
+  font-family: 'Chau Philomene One', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  section.subscribe-line .headline{
+    margin: 10px 0;
+  }
+}
+
 /* Social line */
 section.social-line {
   background-color: #eeeeee;
@@ -672,10 +693,14 @@ footer.footer {
 
 .footer nav > ul a.btn{
   font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .footer nav > ul a:not(.btn){
   color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .footer nav > ul a:not(.btn):hover, .footer nav > ul a:not(.btn):focus{

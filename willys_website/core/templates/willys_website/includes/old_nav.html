@@ -16,6 +16,11 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="hidden-xs"><a href="#" class="btn btn-social btn-simple color-black-2"><i class="fa fa-facebook-square"></i></a></li>
+        <li class="hidden-xs"><a href="#" class="btn btn-social btn-simple color-black-2"><i class="fa fa-instagram"></i></a></li>
+        <li class="hidden-xs"><a href="#" class="btn btn-social btn-simple color-black-2"><i class="fa fa-twitter"></i></a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <img class="white-logo img-responsive visible-xs center" style="width:60px;padding:20px 0;" alt="Willy's Brewing" src="{% static 'images/willys.svg' %}">
         <li class="dropdown">
@@ -25,12 +30,25 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="/cervezas/apa">APA</a></li>
-            <li><a href="/cervezas/ipa">IPA</a></li>
+            <li><a href="/cervezas/dubble">DUBBLE</a></li>
           </ul>
         </li>
         <li class=""><a href="/eventos">Eventos</a></li>
         <!--<li class=""><a href="/blog">Blog</a></li>-->
         <li><a href="/" class="btn btn-fill btn-lg bg-black-2 color-white material-shadow">ZONA WILLY'S</a></li>
+        <div class="visible-xs margin-20">
+          <div class="row">
+            <div class="col-xs-3 col-xs-offset-1">
+              <a href="#" class="btn btn-social btn-simple color-black-2" style="font-size:30px;"><i class="fa fa-facebook-square"></i></a>
+            </div>
+            <div class="col-xs-3">
+              <a href="#" class="btn btn-social btn-simple color-black-2" style="font-size:30px;"><i class="fa fa-instagram"></i></a>
+            </div>
+            <div class="col-xs-3">
+              <a href="#" class="btn btn-social btn-simple color-black-2" style="font-size:30px;"><i class="fa fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
        </ul>
     </div>
   </div>
