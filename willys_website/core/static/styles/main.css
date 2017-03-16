@@ -77,7 +77,7 @@ ul{
 
 /* Brand */
 .font-brand{
-    font-family: 'Cabin Sketch', cursive;
+    font-family: 'Chau Philomene One', sans-serif;
     text-transform: uppercase;
     font-weight: bolder;
     letter-spacing: 2px;
@@ -378,10 +378,11 @@ section.hero .subtitle {
   padding: 20px 0;
   font-size: 70px;
   text-transform: uppercase;
-  border-top: 3px solid #fff;
-  border-bottom: 3px solid #fff;
-  font-family: 'Cabin Sketch', cursive;
+  /*border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;*/
+  font-family: 'Chau Philomene One', sans-serif;
   font-weight: bolder;
+  letter-spacing: 7px;
 }
 
 section.hero.header-filter {
@@ -523,7 +524,7 @@ section.hero.product-hero .container {
 section.hero.product-hero .title{
   margin: 30px 0 0 0;
   font-size: 66px;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Chau Philomene One', sans-serif;
   font-weight: bolder;
 }
 
@@ -600,7 +601,7 @@ section.hero.hero-video.header-filter::before {
 /* Promo */
 section.promo{
   padding: 40px 0;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Chau Philomene One', sans-serif;
   font-weight: bolder;
   letter-spacing: 1.5px;
 }
