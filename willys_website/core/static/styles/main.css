@@ -378,8 +378,8 @@ section.hero .subtitle {
   padding: 20px 0;
   font-size: 70px;
   text-transform: uppercase;
-  /*border-top: 3px solid #fff;
-  border-bottom: 3px solid #fff;*/
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
   font-family: 'Chau Philomene One', sans-serif;
   font-weight: bolder;
   letter-spacing: 7px;
