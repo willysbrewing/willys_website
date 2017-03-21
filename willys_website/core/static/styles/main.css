@@ -668,6 +668,10 @@ section.subscribe-line h3{
   text-align: center;
 }
 
+section.subscribe-line .btn{
+  text-transform: uppercase;
+}
+
 @media (max-width: 767px) {
   section.subscribe-line .headline{
     margin: 10px 0;

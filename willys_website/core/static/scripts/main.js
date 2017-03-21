@@ -157,6 +157,77 @@
             initRightMenu();
         }
 
+        // Form
+        var form = document.getElementById('register-form');
+        if (form.attachEvent) {
+            form.attachEvent('submit', processForm);
+        } else {
+            form.addEventListener('submit', processForm);
+        }
+
+        function processForm(e) {
+          if (e.preventDefault) e.preventDefault();
+
+          try{
+            var form = document.getElementById('register-form');
+            var email = form.querySelector('#inputEmail').value;
+            var policy = form.querySelector('#policy').checked;
+
+            if(email && policy){
+              var data = {email:email};
+              var leadFormButton = document.getElementById('lead-form-button');
+              leadFormButton.style.display = 'none';
+              var processing = document.getElementById('processing-form');
+              processing.style.display = 'block';
+              try{
+                // SendMail
+                sendEmail(data);
+
+                // Track Event
+                dataLayer.push({'event': 'lead_real'});
+
+                processing.style.display = 'none';
+                var success = document.getElementById('success-form');
+                success.style.display = 'block';
+              }
+              catch(e){}
+            }
+          } catch(e){}
+          return false;
+        }
+
+        function sendEmail(data){
+          var url = 'https://notifications.api.willysbrewing.com/mail/send';
+          var q = new XMLHttpRequest();
+          q.open('POST', url, true);
+          q.setRequestHeader('Content-Type', 'application/json');
+          q.onreadystatechange = function(){
+            if(this.readyState === 4){
+              if(this.status.toString()[0] == '2'){
+                // ok
+              }
+              else if(this.status.toString()[0] == '4' || this.status.toString()[0] == '5'){
+                // error
+              }
+              else{
+                // foo
+              }
+            }
+          };
+          var payload = {
+            'recipient': data.email,
+            'subject': '',
+            'content': '',
+            'template':{
+              'id': 'c348a464-4240-4cf4-9c88-7b2c892070d7',
+              'data':{
+                'name': 'notset'
+              }
+            }
+          };
+          q.send(JSON.stringify(payload));
+        }
+
         // Do not delay load of page with async functionality: Wait for window load
         window.addEventListener('load', function(){
 
