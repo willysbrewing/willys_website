@@ -1,6 +1,6 @@
 {% extends "willys_website/base.html" %}
 
-{% load willys_website_tags %}
+{% load willys_website_tags static %}
 
 {% block body_class %}{% endblock %}
 
@@ -17,18 +17,22 @@
                  <h3 class="center">Únete a la revolución de la cerveza</h3>
                </div>
              </div>
-             <div class="col-sm-5">
-                <form class="">
-                     <div class="form-group">
-                          <input type="text" value="" class="form-control" placeholder="Introduce tu email... ">
-                          <input type="checkbox" name="policy"> Acepto las políticas de privacidad<br>
-                     </div>
-                 </form>
-             </div>
-             <div class="col-sm-2">
-               <div class="center">
-                 <a href="/" class="btn btn-fill btn-lg bg-black-2 color-white material-shadow">ENVIAR</a>
-               </div>
+             <div class="col-sm-7">
+               <form id="register-form" class="row">
+                 <div class="col-sm-8">
+                   <div class="form-group">
+                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" required="">
+                      <input type="checkbox" id="policy" required=""> Acepto las políticas de privacidad<br>
+                   </div>
+                 </div>
+                 <div class="col-sm-4">
+                   <div class="center">
+                     <button id="lead-form-button" type="submit" class="btn btn-fill btn-lg bg-black-2 color-white material-shadow" data-gtm-cat="Interest" data-gtm-action="Lead" data-gtm-label="Click">Enviar</button>
+                     <img id="processing-form" width="50px" src="{% static 'images/loader.gif' %}" style="display:none;">
+                     <span id="success-form" style="display:none;">¡Bienvenido a Willy's!</span>
+                   </div>
+                 </div>
+               </form>
              </div>
           </div>
        </div>
