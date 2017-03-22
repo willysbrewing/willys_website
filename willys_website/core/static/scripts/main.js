@@ -159,10 +159,12 @@
 
         // Form
         var form = document.getElementById('register-form');
-        if (form.attachEvent) {
-            form.attachEvent('submit', processForm);
-        } else {
-            form.addEventListener('submit', processForm);
+        if (form) {
+          if (form.attachEvent) {
+              form.attachEvent('submit', processForm);
+          } else {
+              form.addEventListener('submit', processForm);
+          }
         }
 
         function processForm(e) {

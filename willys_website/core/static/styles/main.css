@@ -343,7 +343,7 @@ section{
 section.hero {
   background-size: cover;
   background-attachment: fixed;
-  background-position: center center;
+  /*background-position: center center;*/
   /*height: 100vh;*/
   min-height: 520px;
   margin: 0;
@@ -560,7 +560,7 @@ section.hero.product-hero .image {
     font-size: 50px;
   }
   section.hero.product-hero .image {
-    max-height: 320px;
+    max-height: 360px;
   }
 }
 
