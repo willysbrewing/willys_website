@@ -629,9 +629,10 @@ section.full{
 
 section.full .display{
     transition: opacity 1s ease;
-    height: 450px;
+    height: 400px;
     background-size: cover;
     background-position: center center;
+    border: 5px solid #000;
 }
 
 section.full .display:hover {
@@ -648,12 +649,12 @@ section.full .display .text h3{
 
 @media (max-width: 767px) {
   section.full .display{
-      height: 240px;
+      height: 200px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   section.full .display{
-      height: 650px;
+      height: 350px;
   }
 }
 
