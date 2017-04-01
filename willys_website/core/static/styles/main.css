@@ -725,7 +725,12 @@ footer.footer {
 }
 
 .streamfield p{
-  font-size: 16px; }
+  font-size: 16px;
+}
+
+.streamfield a{
+  color: #333;
+  text-decoration: underline;
 }
 
 .streamfield h2{
