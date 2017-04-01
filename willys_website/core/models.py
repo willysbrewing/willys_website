@@ -422,6 +422,7 @@ class EventPage(Page):
 
     date_from = models.DateField('Start date')
     time_from = models.TimeField('Start time', default=None)
+    location_name = models.CharField(max_length=255, default='notset')
     location = models.CharField(max_length=255)
     body = StreamField(GenericStreamBlock())
     cost = models.CharField(max_length=255)
@@ -441,7 +442,7 @@ class EventPage(Page):
 
     @property
     def feed_image(self):
-        return self.hero[0].get('background')        
+        return self.hero[0].get('background')
 
     @property
     def event_index(self):
@@ -452,6 +453,7 @@ class EventPage(Page):
         ImageChooserPanel('image'),
         FieldPanel('date_from'),
         FieldPanel('time_from'),
+        FieldPanel('location_name'),
         FieldPanel('location'),
         FieldPanel('cost'),
         StreamFieldPanel('body'),
