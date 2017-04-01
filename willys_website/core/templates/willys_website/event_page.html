@@ -24,14 +24,14 @@
         </div>
       </div>
 
+      {% if self.body %}
+        {% include "willys_website/includes/streamfield.html" with content=self.body %}
+      {% endif %}
+
       <div class="map margin-20">
         <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB4TdPdkmQz0PJR7eU6V7ARf5l1bdnLbxU&q={{ self.location|safe }}" allowfullscreen>
         </iframe>
       </div>
-
-      {% if self.body %}
-        {% include "willys_website/includes/streamfield.html" with content=self.body %}
-      {% endif %}
 
     </div>
   </section>
