@@ -1,5 +1,5 @@
-{% load willys_website_tags cache static wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags compress %}
-<!DOCTYPE html>
+{% load willys_website_tags cache static wagtailuserbar wagtailcore_tags wagtailimages_tags wagtailsettings_tags compress wagtailschemaorg_tags %}
+<!DOCTYPE html>{% load %}
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
@@ -41,6 +41,10 @@
         <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}" />
         <meta property="og:site_name" content="willysbrewing" />
 
+        {% ld_for_site %}
+        {% if page.ld_entity_list %}
+          {% ld_for_object page %}
+        {% endif %}
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
 
         <!-- Latest compiled and minified CSS -->

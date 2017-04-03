@@ -9,6 +9,7 @@ django-redis==4.6.0
 django-taggit==0.18.3
 django-treebeard==4.1.0
 djangorestframework==3.5.3
+wagtail-schema.org==0.3.0
 html5lib==0.999999999
 meld3==1.0.2
 Pillow==3.4.2

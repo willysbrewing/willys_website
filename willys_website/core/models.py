@@ -1,4 +1,5 @@
 from datetime import date
+from time import strftime
 
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -26,6 +27,37 @@ from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+
+from wagtail.contrib.settings.models import register_setting
+from wagtailschemaorg.models import PageLDMixin, BaseLDSetting
+from wagtailschemaorg.registry import register_site_thing
+from wagtailschemaorg.utils import extend, image_ld
+
+##################################################################
+########### GLOBAL LD-SCHEMAS ########################
+##################################################################
+
+@register_setting
+@register_site_thing
+class Organization(BaseLDSetting):
+    """Details about this organisation"""
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    twitter_url = models.URLField()
+    facebook_url = models.URLField()
+    instagram_url = models.URLField()
+
+    def ld_entity(self):
+        return extend(super().ld_entity(), {
+            '@type': 'Organization',
+            'name': self.name,
+            'email': self.email,
+            'sameAs': [
+                self.facebook_url,
+                self.instagram_url,
+                self.facebook_url,
+            ],
+        })
 
 ##################################################################
 ########### Global Streamfield definition ########################
@@ -416,7 +448,7 @@ class EventIndexPage(Page):
 class EventPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.EventPage', related_name='related_links')
 
-class EventPage(Page):
+class EventPage(Page, PageLDMixin):
     parent_page_types = ['willys_website.EventIndexPage'] # Parent can only be a EventIndex
     subpage_types = [] # No Children
 
@@ -463,6 +495,20 @@ class EventPage(Page):
 
     promote_panels = Page.promote_panels
 
+    def ld_entity(self):
+        site = self.get_site()
+        return extend(super().ld_entity(), {
+            '@type': 'Event',
+            "name": self.title,
+            "startDate" : self.date_from.strftime('%d-%m-%Y')+'T'+self.time_from.strftime('%H:%M'),
+            "url" : site.root_url+self.url,
+            "location": {
+                "@type" : "Place",
+                "name" : self.location_name,
+                "address" : self.location
+            }
+        })
+
 ##################################################################
 ################# Product Index Page #############################
 ##################################################################
@@ -500,7 +546,7 @@ class ProductPageHero(Orderable, HeroItem):
 class ProductPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('willys_website.ProductPage', related_name='related_links')
 
-class ProductPage(Page):
+class ProductPage(Page, PageLDMixin):
     parent_page_types = ['willys_website.ProductIndexPage'] # Parent can only be a ProductIndex
     subpage_types = [] # No Children
 
@@ -571,6 +617,18 @@ class ProductPage(Page):
     ]
 
     promote_panels = Page.promote_panels
+
+    def ld_entity(self):
+        site = self.get_site()
+        return extend(super().ld_entity(), {
+            '@type': 'Product',
+            "name": self.name,
+            "image": image_ld(self.image, base_url=site.root_url),
+            "brand": {
+                "@type": "Thing",
+                "name": "Willy's"
+            }
+        })
 
 ##################################################################
 ################# Landing Page ###################################

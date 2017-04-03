@@ -68,6 +68,7 @@ INSTALLED_APPS += [
     'wagtail.contrib.wagtailfrontendcache',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtailmedia',
+    'wagtailschemaorg',
 ]
 
 MIDDLEWARE = [
