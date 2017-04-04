@@ -12,24 +12,28 @@
     <section class="subscribe-line">
        <div class="container">
           <div class="row">
-             <div class="col-sm-5">
+             <div class="col-sm-4">
                <div class="headline">
                  <h3 class="center">Únete a la revolución de la cerveza</h3>
                </div>
              </div>
-             <div class="col-sm-7">
+             <div class="col-sm-3 hidden-xs">
+               <p class="center claim">
+                 <small>Últimas noticias, eventos y contenido con sello Willy's directamente a tu inbox</small></p>
+             </div>
+             <div class="col-sm-5">
                <form id="register-form" class="row">
                  <div class="col-sm-8">
                    <div class="form-group">
                       <input type="email" class="form-control" id="inputEmail" placeholder="Email" required="">
-                      <input type="checkbox" id="policy" required=""> Acepto las políticas de privacidad<br>
+                      <input type="checkbox" id="policy" checked required=""><span>&nbsp;Acepto las políticas de privacidad</span>
                    </div>
                  </div>
                  <div class="col-sm-4">
                    <div class="center">
                      <button id="lead-form-button" type="submit" class="btn btn-fill btn-lg bg-black-2 color-white material-shadow" data-gtm-cat="Interest" data-gtm-action="Lead" data-gtm-label="Click">Enviar</button>
                      <img id="processing-form" width="50px" src="{% static 'images/loader.gif' %}" style="display:none;">
-                     <span id="success-form" style="display:none;">¡Bienvenido a Willy's!</span>
+                     <span id="success-form" style="display:none;">¡Bienvenido a Willy's!🎉</span>
                    </div>
                  </div>
                </form>

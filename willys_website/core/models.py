@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta, datetime, time
 from time import strftime
 
 from django.db import models
@@ -500,12 +500,23 @@ class EventPage(Page, PageLDMixin):
         return extend(super().ld_entity(), {
             '@type': 'Event',
             "name": self.title,
-            "startDate" : self.date_from.strftime('%d-%m-%Y')+'T'+self.time_from.strftime('%H:%M'),
+            "startDate" : (datetime.combine(self.date_from, self.time_from)).strftime('%d-%m-%YT%H:%M'),
+            "endDate" : (datetime.combine(self.date_from, self.time_from)+timedelta(hours=6)).strftime('%d-%m-%YT%H:%M'),
             "url" : site.root_url+self.url,
+            "eventStatus": "EventScheduled",
+            "image": image_ld(self.image, base_url=site.root_url),
             "location": {
                 "@type" : "Place",
                 "name" : self.location_name,
                 "address" : self.location
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://www.willysbrewing.com/cervezas/riot-apa",
+                "category": "primary",
+                "availability": "InStock",
+                "price": "3.50",
+                "priceCurrency": "EUR"
             }
         })
 
