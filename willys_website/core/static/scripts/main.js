@@ -176,6 +176,8 @@
             var policy = form.querySelector('#policy').checked;
 
             if(email && policy){
+              form.querySelector('#inputEmail').style.borderColor = 'inherit';
+              form.querySelector('#policy').style.borderColor = 'inherit';
               var data = {email:email};
               var leadFormButton = document.getElementById('lead-form-button');
               leadFormButton.style.display = 'none';
@@ -193,6 +195,14 @@
                 success.style.display = 'block';
               }
               catch(e){}
+            }
+            else {
+              if (!email || email === "") {
+                form.querySelector('#inputEmail').style.borderColor = 'red';
+              }
+              if (!policy) {
+                form.querySelector('#policy').style.borderColor = 'red';
+              }
             }
           } catch(e){}
           return false;
