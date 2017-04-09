@@ -442,6 +442,42 @@ class EventIndexPage(Page):
     promote_panels = Page.promote_panels
 
 ##################################################################
+################# Old Event Index Page ###########################
+##################################################################
+
+class OldEventIndexPageHero(Orderable, HeroItem):
+    page = ParentalKey('willys_website.OldEventIndexPage', related_name='hero')
+
+class OldEventIndexPage(Page):
+    parent_page_types = ['willys_website.HomePage']
+    subpage_types = []
+    event_index_page = EventIndexPage()
+
+    @property
+    def events(self):
+        # Get list of live event pages
+        events = EventPage.objects.live()
+
+        # Filter events list to get ones that are either
+        # running now or start in the future
+        events = events.filter(date_from__lt=date.today())
+
+        # Order by date
+        events = events.order_by('-date_from')
+
+        return events
+
+    @property
+    def feed_image(self):
+        return self.hero.all()[0].background
+
+    content_panels = Page.content_panels + [
+        InlinePanel('hero', label='Hero'),
+    ]
+
+    promote_panels = Page.promote_panels
+
+##################################################################
 ################# Event Page #####################################
 ##################################################################
 

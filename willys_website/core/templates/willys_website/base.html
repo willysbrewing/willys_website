@@ -9,8 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
-        <meta name="keywords" content="willys brewing, willy's, willy's brewing, cerveza, cerveza española, cerveza revolución">
-        <meta name="author" content="Willy's Brewing" /><!-- @TODO-->
+        <meta name="keywords" content="willys brewing, willy's, willy's brewing, cerveza natural, cerveza, cerveza española, cerveza revolución">
+        <meta name="author" content="@willysbrewing" />
         {% if self.canonical_url %}
             <link rel="canonical" href="{{ self.canonical_url }}" />
         {% endif %}
@@ -33,7 +33,7 @@
         <meta name="twitter:description" content="{% if self.intro %}{{ self.intro|striptags }}{% elif self.search_description %}{{ self.search_description }}{% endif %}">
         <meta name="twitter:image:src" content="https://{{ request.site.hostname }}{% if self.feed_image %}{% image self.feed_image width-400 as img %}{{ img.url }}{% else %}{% static 'images/willys-content.png' %}{% endif %}" />
 
-        <meta property="fb:app_id" content="" />
+        <meta property="fb:app_id" content="195907537508439" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://{{ request.site.hostname }}{{ self.url }}" />
         <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %} | Willy's" />
