@@ -1,0 +1,25 @@
+{% extends "willys_website/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% include "willys_website/includes/simple_hero.html" with hero=self.hero.all only %}
+
+    <!-- event-index -->
+    <section class="event-index">
+      {% with self.events.all as events %}
+        {% if events %}
+          {% for event in events %}
+              {% include "willys_website/includes/event_list_item.html" %}
+          {% empty %}
+              No Events found
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </section>
+    <!-- endeventindex -->
+
+    <!--{% include "willys_website/includes/related_links.html" with related_links=self.related_links.all only %}-->
+
+{% endblock %}
