@@ -282,6 +282,7 @@ class StandardPageHeroItem(Orderable, HeroItem):
 class StandardPage(Page):
     parent_page_types = ['willys_website.HomePage']
     subpage_types = [] # No Children
+    form = models.CharField(max_length=1, default=('N', 'No Form'), choices=(('N', 'No Form'), ('Y', 'Form')))
 
     body = StreamField(GenericStreamBlock())
 
@@ -292,6 +293,7 @@ class StandardPage(Page):
     content_panels = Page.content_panels + [
         InlinePanel('hero', label='Hero'),
         StreamFieldPanel('body'),
+        FieldPanel('form'),
     ]
 
     promote_panels = Page.promote_panels
@@ -310,7 +312,7 @@ class BlogIndexPage(Page):
     @property
     def blog_posts(self):
         # Get list of blog pages that are descendants of this page
-        blog_posts= BlogPage.objects.live().descendant_of(self)
+        blog_posts = BlogPage.objects.live().descendant_of(self)
 
         # Order by most recent date first
         blog_posts = blog_posts.order_by('-date')
@@ -451,7 +453,6 @@ class OldEventIndexPageHero(Orderable, HeroItem):
 class OldEventIndexPage(Page):
     parent_page_types = ['willys_website.HomePage']
     subpage_types = []
-    event_index_page = EventIndexPage()
 
     @property
     def events(self):

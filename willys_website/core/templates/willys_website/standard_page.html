@@ -23,4 +23,8 @@
       </div>
     </section>
 
+    {% if self.form == 'Y' %}
+      {% include 'willys_website/includes/contact_form.html' %}
+    {% endif %}
+
 {% endblock %}

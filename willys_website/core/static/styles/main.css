@@ -703,6 +703,33 @@ section.subscribe-line span{
   }
 }
 
+/* Contact */
+section.contact {
+  padding: 0 0 40px 0;
+}
+
+section.contact #contact-form{
+
+}
+
+section.contact #contact-form input{
+  margin: 10px 0;
+}
+
+section.contact #contact-form textarea{
+  height: 120px;
+}
+
+section.contact #contact-form button{
+  margin: 10px 0;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  section.contact #contact-form button{
+  }
+}
+
 /* Social line */
 section.social-line {
   background-color: #eeeeee;

@@ -63,3 +63,7 @@ section.event{
 section.event h2{
   font-family: 'Chau Philomene One', sans-serif;
 }
+
+.event-welcome-form .subscribe-line{
+  background-color: #eeeeee;
+}

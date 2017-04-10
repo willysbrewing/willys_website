@@ -61,3 +61,7 @@ section.product-index .product-wrapper .product .display img{
     margin: 140px 0 40px 0;
   }
 }
+
+.product-welcome-form .subscribe-line{
+  background-color: #eeeeee;
+}
