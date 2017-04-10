@@ -282,7 +282,7 @@ class StandardPageHeroItem(Orderable, HeroItem):
 class StandardPage(Page):
     parent_page_types = ['willys_website.HomePage']
     subpage_types = [] # No Children
-    form = models.CharField(max_length=1, default=('N', 'No Form'), choices=(('N', 'No Form'), ('Y', 'Form')))
+    form = models.CharField(max_length=255, default=('N', 'No Form'), choices=(('N', 'No Form'), ('Y', 'Form')))
 
     body = StreamField(GenericStreamBlock())
 
