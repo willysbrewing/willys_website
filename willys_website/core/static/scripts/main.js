@@ -158,16 +158,16 @@
         }
 
         // Form
-        var form = document.getElementById('register-form');
-        if (form) {
-          if (form.attachEvent) {
-              form.attachEvent('submit', processForm);
+        var welcomeForm = document.getElementById('register-form');
+        if (welcomeForm) {
+          if (welcomeForm.attachEvent) {
+              welcomeForm.attachEvent('submit', processWelcomeForm);
           } else {
-              form.addEventListener('submit', processForm);
+              welcomeForm.addEventListener('submit', processWelcomeForm);
           }
         }
 
-        function processForm(e) {
+        function processWelcomeForm(e) {
           if (e.preventDefault) e.preventDefault();
 
           try{
@@ -185,7 +185,7 @@
               processing.style.display = 'block';
               try{
                 // SendMail
-                sendEmail(data);
+                sendEmail('c348a464-4240-4cf4-9c88-7b2c892070d7', data);
 
                 // Track Event
                 dataLayer.push({'event': 'lead_real'});
@@ -208,7 +208,63 @@
           return false;
         }
 
-        function sendEmail(data){
+        // ContactForm
+        var contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+          if (contactForm.attachEvent) {
+              contactForm.attachEvent('submit', processContactForm);
+          } else {
+              contactForm.addEventListener('submit', processContactForm);
+          }
+        }
+
+        function processContactForm(e) {
+          if (e.preventDefault) e.preventDefault();
+
+          try{
+            var form = document.getElementById('contact-form');
+            var email = form.querySelector('#inputEmail').value;
+            var policy = form.querySelector('#policy').checked;
+            var content = form.querySelector('#content').value;
+
+            if(email && policy && content){
+              form.querySelector('#inputEmail').style.borderColor = 'inherit';
+              form.querySelector('#content').style.borderColor = 'inherit';
+              form.querySelector('#policy').style.borderColor = 'inherit';
+              var data = {email:'contacto@willysbrewing.com', content:content, from:email};
+              var leadFormButton = document.getElementById('lead-form-button');
+              leadFormButton.style.display = 'none';
+              var processing = document.getElementById('processing-form');
+              processing.style.display = 'block';
+              try{
+                // SendMail
+                sendEmail('b9e4a79f-5bd0-4ba9-b0b1-4a6a64df9156', data);
+
+                // Track Event
+                dataLayer.push({'event': 'contact_form'});
+
+                processing.style.display = 'none';
+                var success = document.getElementById('success-form');
+                success.style.display = 'block';
+              }
+              catch(e){}
+            }
+            else {
+              if (!email || email === "") {
+                form.querySelector('#inputEmail').style.borderColor = 'red';
+              }
+              if (!content || content === "") {
+                form.querySelector('#content').style.borderColor = 'red';
+              }
+              if (!policy) {
+                form.querySelector('#policy').style.borderColor = 'red';
+              }
+            }
+          } catch(e){}
+          return false;
+        }
+
+        function sendEmail(id, data){
           var url = 'https://notifications.api.willysbrewing.com/mail/send';
           var q = new XMLHttpRequest();
           q.open('POST', url, true);
@@ -228,23 +284,19 @@
           };
           var payload = {
             'recipient': data.email,
-            'subject': '',
-            'content': '',
+            'subject': data.subject || '',
+            'content': data.content || '',
             'template':{
-              'id': 'c348a464-4240-4cf4-9c88-7b2c892070d7',
+              'id': id,
               'data':{
-                'name': 'notset'
+                'name': data.name || 'notset',
+                'from': data.from || 'notset',
+                'content': data.content || 'notset'
               }
             }
           };
           q.send(JSON.stringify(payload));
         }
-
-        // Do not delay load of page with async functionality: Wait for window load
-        window.addEventListener('load', function(){
-
-
-        }); // End of window load
 
         $(window).resize(function(){
 
