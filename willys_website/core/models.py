@@ -63,46 +63,47 @@ class Organization(BaseLDSetting):
 ########### Global Streamfield definition ########################
 ##################################################################
 
-class PullQuoteBlock(StructBlock):
-    quote = TextBlock('quote title')
-    attribution = CharBlock()
-
-    class Meta:
-        icon = 'openquote'
-
-
 class ImageFormatChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('left', 'Wrap left'), ('right', 'Wrap right'), ('mid', 'Mid width'), ('full', 'Full width'),
     ))
-
 
 class HTMLAlignmentChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
         ('normal', 'Normal'), ('full', 'Full width'),
     ))
 
+class TwoColumnsChoiceBlock(FieldBlock):
+    field = forms.ChoiceField(choices=(
+        ('left', 'Left'), ('right', 'Right'),
+    ))
+
+class PullQuoteBlock(StructBlock):
+    quote = TextBlock('quote title')
+    attribution = CharBlock()
 
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
 
-
 class AlignedHTMLBlock(StructBlock):
     html = RawHTMLBlock()
 
-    class Meta:
-        icon = 'code'
-
+class TwoColumns(StructBlock):
+    type = TwoColumnsChoiceBlock()
+    image = ImageChooserBlock()
+    headline = CharBlock()
+    text = TextBlock()
 
 class GenericStreamBlock(StreamBlock):
     h2 = CharBlock(icon='title', classname='title')
     h3 = CharBlock(icon='title', classname='title')
     h4 = CharBlock(icon='title', classname='title')
     intro = RichTextBlock(icon='pilcrow')
-    pullquote = PullQuoteBlock()
+    pullquote = PullQuoteBlock(icon='openquote')
     paragraph = RichTextBlock(icon='pilcrow')
     image = ImageBlock(icon='image', label='image')
     html = AlignedHTMLBlock(icon='code', label='html')
+    two_columns = TwoColumns(icon='code', label='Two Columns')
 
 ##################################################################
 ########### Abstract classes #####################################

@@ -25,10 +25,38 @@
                     </div>
                 </div>
             </div>
+        {% elif child.block_type == 'two_columns' %}
+          <div class="two-columns">
+            {% if child.value.type == 'left' %}
+              <div class="row">
+                <div class="col-sm-6">
+                  {% image child.value.image width-512 as blockimage %}
+                  <img class="img-responsive center" src="{{ blockimage.url }}" width="{{ blockimage.width }}" height="{{ blockimage.height }}" alt="{{ blockimage.alt }}">
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                  <h3>{{ child.value.headline }}</h3>
+                  <p>{{ child.value.text }}</p>
+                </div>
+              </div>
+            {% elif child.value.type == 'right' %}
+              <div class="row">
+                <div class="col-sm-6 visible-xs">
+                  {% image child.value.image width-512 as blockimage %}
+                  <img class="img-responsive center" src="{{ blockimage.url }}" width="{{ blockimage.width }}" height="{{ blockimage.height }}" alt="{{ blockimage.alt }}">
+                </div>
+                <div class="col-sm-5">
+                  <h3>{{ child.value.headline }}</h3>
+                  <p>{{ child.value.text }}</p>
+                </div>
+                <div class="col-sm-6 col-sm-offset-1 hidden-xs">
+                  {% image child.value.image width-512 as blockimage %}
+                  <img class="img-responsive center" src="{{ blockimage.url }}" width="{{ blockimage.width }}" height="{{ blockimage.height }}" alt="{{ blockimage.alt }}">
+                </div>
+              </div>
+            {% endif %}
+          </div>
         {% elif child.block_type == 'html' %}
-            {{ child.value|safe }}
-        {% elif child.block_type == 'embed' %}
-            <div>{{ child }}</div>
+            {{ child.value | safe }}
         {% else %}
             {{ child }}
         {% endif %}

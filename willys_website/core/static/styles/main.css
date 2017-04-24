@@ -725,6 +725,10 @@ section.contact #contact-form button{
   display: block;
 }
 
+section.contact #contact-form .form-control:focus, section.contact #contact-form .form-control:hover {
+  border-color: #000;
+}
+
 @media (max-width: 767px) {
   section.contact #contact-form button{
   }
@@ -735,6 +739,17 @@ section.social-line {
   background-color: #eeeeee;
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;
+}
+
+/* Standard page */
+section.standard{
+
+}
+
+@media (max-width: 767px) {
+  section.standard{
+    padding: 0;
+  }
 }
 
 /* Footer */
@@ -813,6 +828,23 @@ footer.footer {
   width: 100%;
   height: auto;
   margin: 20px auto;
+}
+
+.streamfield .two-columns h3{
+  font-family: 'Chau Philomene One', sans-serif;
+  text-transform: uppercase;
+}
+
+.streamfield .two-columns img{
+  width: auto;
+  height: auto;
+  margin: 20px auto;
+}
+
+@media (max-width: 767px) {
+  .streamfield .two-columns img{
+    max-width: 200px;
+  }
 }
 
 /** MODAL **/
